@@ -1,0 +1,32 @@
+include ../mixins/mixins-meta
+include ../mixins/mixins-dashboard
+
+append head
+  mixin css("ops-map-sensors")
+
+append foot
+  script(src='http://cdn.leafletjs.com/leaflet/v1.0.0-beta.2/leaflet.js')
+  script(src='http://cdn.jsdelivr.net/leaflet.esri/2.0.0-beta.7/esri-leaflet.js')
+  script(src='http://cdn.jsdelivr.net/leaflet.esri.heatmap-feature-layer/2.0.0-beta.1/esri-leaflet-heatmap-feature-layer.js')
+  script(src='/js/components/sheep-map-heat.js')
+  script(src='/plugins/leaflet/leaflet-heat.js')
+  
+
+
+#sheepHeatMapDiv.box.box-primary
+  .box-header.no-border
+    h3.box-title Sheep Position Heat Map
+    .box-tools.pull-right
+      button.btn.btn-box-tool(data-widget='collapse')
+        i.fa.fa-minus
+      button.btn.btn-box-tool(data-widget='remove')
+        i.fa.fa-times
+  .box-body
+    mixin basicMap("sheepHeatMap", 300)
+    .form-group
+      label Select Date:
+      #sheepHeatSelectDate.input-group.date
+              input.form-control(type='text')
+              span.input-group-addon
+                span.glyphicon.glyphicon-calendar
+      #sheepHeatStatusText

@@ -1,0 +1,19 @@
+{
+  "members": [
+    {
+      "image": "http://flat-icon-design.com/f/f_event_97/s256_f_event_97_0bg.png",
+      "name": "Polly",
+      "status": "98% Battery | 5 Errors"
+    },
+    {
+      "image": "http://i.istockimg.com/file_thumbview_approve/59063074/3/stock-illustration-59063074-sheep-flat-icon-over-brown.jpg",
+      "name": "Dolly",
+      "status": "12% Battery | 90 Errors"
+    },
+    {
+      "image": "http://flat-icon-design.com/f/f_event_97/s256_f_event_97_0bg.png",
+      "name": "Molly",
+      "status": "55% Battery | 0 Errors"
+    }
+  ]
+}

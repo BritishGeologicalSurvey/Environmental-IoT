@@ -1,0 +1,36 @@
+extend layout
+
+append head
+
+append foot
+
+block navigationLinks
+
+block sectionContentHeader
+  section.content-header
+    h1
+      | 404 Error Page
+    ol.breadcrumb
+      li
+        a(href='../../ops')
+          i.fa.fa-dashboard
+          | Home
+      li.active 404 error
+  // Main content
+  section.content
+    .error-page
+      h2.headline.text-info  404
+      .error-content
+        h3
+          i.fa.fa-warning.text-yellow
+          | Oops! Page not found.
+        p
+          | We could not find the page you were looking for.
+          | Meanwhile, you may 
+          a(href='../../ops') return to the IoT dashboard.
+      
+    
+block sectionContentLeftCol
+
+
+block sectionContentRightCol
