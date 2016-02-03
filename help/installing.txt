@@ -16,5 +16,8 @@ npm install
 
 # Grab a Cuppa while dependancies are downloaded/compiled/installed!
 
+# Start node
+npm start
+
 # Test on web browser on host machine
 http://localhost:3000
