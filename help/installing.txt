@@ -1,3 +1,10 @@
+# This works best if the host machine is linux or mac based
+# As there are issues with using node.js on a windows file system (symbolic links/file path length)
+
+# Install Virtualbox and Vagrant from:
+https://www.virtualbox.org/
+https://www.vagrantup.com/
+
 # Clone Repo
 git clone https://github.com/BritishGeologicalSurvey/Environmental-IoT
 
