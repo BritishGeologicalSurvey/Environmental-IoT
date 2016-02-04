@@ -1,5 +1,6 @@
 .vagrant
 
 # Ignore sensitive data
-data
+envdata.tar.gz
+data/envdata
 map-locations.js
