@@ -1,2 +1,5 @@
 .vagrant
+
+# Ignore sensitive data
 data
+map-locations.js
