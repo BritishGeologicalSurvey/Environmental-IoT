@@ -1,0 +1,30 @@
+# This works best if the host machine is linux or mac based
+# As there are issues with using node.js on a windows file system (symbolic links/file path length)
+
+# Install Virtualbox and Vagrant from:
+https://www.virtualbox.org/
+https://www.vagrantup.com/
+
+# Clone Repo
+git clone https://github.com/BritishGeologicalSurvey/Environmental-IoT
+
+# Copy sensitive files not in repo
+cp dbsecure.js Environmental-IoT/code/dbsecure.js
+cp map-locations.js Environmental-IoT/code/public/js/components/map-locations.js
+
+# Start Vagrant Machine
+cd Environmental-IoT
+vagrant up
+vagrant ssh
+
+# Now on vagrant vm
+cd /vagrant/code
+npm install
+
+# Grab a Cuppa while dependancies are downloaded/compiled/installed!
+
+# Start node
+npm start
+
+# Test on web browser on host machine
+http://localhost:3000

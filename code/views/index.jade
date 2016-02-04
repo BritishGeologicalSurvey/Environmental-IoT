@@ -1,0 +1,38 @@
+extend layout
+include ./mixins/mixins-dashboard
+
+append head
+
+append foot
+
+block navigationLinks
+  - var navSelected = 'Operations'; 
+
+block sectionContentHeader
+  h1
+    | Operations
+    small
+      | Here you can monitor the hardware and software operations as part of this IoT project.
+  ol.breadcrumb
+    li
+      a(href='#')
+        i.fa.fa-dashboard
+        |  Operations
+    li.active Summary
+    
+block sectionContentTop
+  include includes/ops-update-timeline.jade
+
+block sectionContentLeftCol
+  +placeholderSmallBox("10 /18", "Node Status", "134 / 156", "Sensor Status")
+  //- +placeholderBox("System status")
+  include includes/site-location-map.jade
+  include includes/ops-sensormodule-list.jade
+  include includes/ops-single-sensor.jade
+
+block sectionContentRightCol
+  +placeholderBox("Node status")
+  +placeholderBox("Sensor Status")
+  +placeholderBox("Battery Status")
+  +placeholderBox("Network status")
+  include includes/sheep-grid-status.jade

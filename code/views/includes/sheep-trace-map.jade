@@ -1,0 +1,46 @@
+extends ../components/component-box-calendar.jade
+include ../mixins/mixins-meta
+include ../mixins/mixins-dashboard
+
+append head
+  mixin css("sheep-map-trace")
+
+append foot
+  script(src='http://cdn.leafletjs.com/leaflet/v1.0.0-beta.2/leaflet.js')
+  script(src='http://cdn.jsdelivr.net/leaflet.esri/2.0.0-beta.7/esri-leaflet.js')
+  script(src='/plugins/leaflet/leaflet.label.js')
+  script(src='/js/components/sheep-map-trace.js')
+
+
+block boxHeading
+  h3.box-title Sheep Position Tracers
+  
+block boxBody
+  mixin basicMap("sheepTraceMap", 300)
+  .form-group
+      label Sheep ID
+      select.form-control(id="sheepTrackSelectSheepId")
+        option 0xd0
+        option 0xd3
+      label Date and time Start:
+      #sheepTrackSelectDateTime.input-group.date
+              input.form-control(type='text')
+              span.input-group-addon
+                span.glyphicon.glyphicon-calendar
+      label Update Frequency (seconds)
+      select.form-control(id="sheepTrackSelectUpdateFrequency")
+        option 10
+        option 20
+        option 30
+        option 40
+      label Time periods (seconds)
+      select.form-control(id="sheepTrackSelectTimePeriod")
+        option 30
+        option 60
+        option 90
+        option 120
+        option 150
+  button(class="btn btn-default", id="SheepButton1").
+    Start
+  #sheepTrackStatusBar Last Updated:
+  

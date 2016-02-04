@@ -1,0 +1,39 @@
+extend layout
+include ./mixins/mixins-dashboard
+
+append head
+
+append foot
+
+block navigationLinks
+  - var navSelected = 'Sheep Sensors'; 
+
+block sectionContentHeader
+  h1
+    | Sheep Sensors
+    small
+      | Here you can monitor the hardware and software operations as part of this IoT project.
+  ol.breadcrumb
+    li
+      a(href='#')
+        i.fa.fa-dashboard
+        |  Sheep Sensors
+    li.active Summary
+
+block sectionContentTop
+  include includes/sheep-summary.jade
+      
+block sectionContentLeftCol
+  +placeholderBox("Flock status traffic lights")
+  include includes/sheep-grid-status.jade
+  +placeholderBox("Sheep behavious pie chart")
+  +placeholderBox("Graph of sheep speed")
+
+block sectionContentRightCol
+  +placeholderBox("Flock health status")
+  +placeholderBox("Flock distance today/week")
+  include includes/sheep-heat-map.jade
+  include includes/sheep-trace-map.jade
+  include includes/sheep-timecells-map.jade
+  +placeholderBox("Sheep stats for individual sheep")
+  include includes/sheep-currentpos-map.jade

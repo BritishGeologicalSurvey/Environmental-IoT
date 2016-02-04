@@ -1,0 +1,21 @@
+extends ../components/component-box.jade
+include ../mixins/mixins-meta
+
+append head
+  mixin css("ops-map-sensors")
+
+append foot
+
+block boxHeading
+  h3.box-title Sheep Status
+  
+block boxBody
+  ul.users-list.clearfix
+        li
+          img(src='http://flat-icon-design.com/f/f_event_97/s256_f_event_97_0bg.png', alt='Sensor Image')
+          a.users-list-name(href='#') Polly
+          span.users-list-date Last Update: Unknown
+        li
+          img(src='http://flat-icon-design.com/f/f_event_97/s256_f_event_97_0bg.png', alt='Sensor Image')
+          a.users-list-name(href='#') Dolly
+          span.users-list-date Last Update: Unknown

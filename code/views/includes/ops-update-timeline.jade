@@ -1,0 +1,60 @@
+extends ../components/component-box.jade
+include ../mixins/mixins-meta
+
+append head
+
+append foot
+
+block boxHeading
+  .h3.box-title Operations Update Timeline
+  
+block boxBody
+  ul.timeline
+        li.time-label
+          span.bg-red
+            | 1st December 2015
+        li
+          i.fa.fa-bar-chart.bg-blue
+          .timeline-item
+            span.time
+              i.fa.fa-clock-o
+              |  12:05
+            h3.timeline-header
+              a(href='#') Sheep Maintenance Team
+              |  Added another sheep to the field
+            .timeline-body
+              | Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles,
+              | weebly ning heekya handango imeem plugg dopplr jibjab, movity
+              | jajah plickers sifteo edmodo ifttt zimbra. Babblely odeo kaboodle
+              | quora plaxo ideeli hulu weebly balihoo...
+            .timeline-footer
+              a.btn.btn-primary.btn-xs Read more
+              a.btn.btn-danger.btn-xs Delete
+        li
+          i.fa.fa-user.bg-aqua
+          .timeline-item
+            span.time
+              i.fa.fa-clock-o
+              |  5 mins ago
+            h3.timeline-header.no-border
+              a(href='#') Farmer Bob
+              |  Added new user to the system
+        // END timeline item
+        // timeline item
+        li
+          i.fa.fa-comments.bg-yellow
+          .timeline-item
+            span.time
+              i.fa.fa-clock-o
+              |  27 mins ago
+            h3.timeline-header
+              a(href='#') Simon LeFleece
+              |  commented on the soil moisture dataset from November 2015
+            .timeline-body
+              | Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles,
+              | weebly ning heekya handango imeem plugg dopplr jibjab, movity
+              | jajah plickers sifteo edmodo ifttt zimbra. Babblely odeo kaboodle
+            .timeline-footer
+              a.btn.btn-warning.btn-flat.btn-xs View comment
+        li
+          i.fa.fa-clock-o.bg-gray

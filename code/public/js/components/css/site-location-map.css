@@ -1,0 +1,11 @@
+#basemaps-wrapper {
+   position: absolute;
+   top: 60px;
+   right: 20px;
+   z-index: 400;
+   background: white;
+   padding: 10px;
+ }
+ #basemaps {
+   margin-bottom: 5px;
+ }

@@ -1,0 +1,19 @@
+extends ../components/component-box.jade
+include ../mixins/mixins-meta
+include ../mixins/mixins-dashboard
+
+append head
+  mixin css("ops-map-sensors")
+
+append foot
+  script(src='http://cdn.leafletjs.com/leaflet/v1.0.0-beta.2/leaflet.js')
+  script(src='http://cdn.jsdelivr.net/leaflet.esri/2.0.0-beta.7/esri-leaflet.js')
+  script(src='/js/components/soil-map-sensors.js')
+
+
+block boxHeading
+  h3.box-title Sensor Map
+  
+block boxBody
+  mixin basicMapWithBasemapToggle("soilLocationsMap", 350, "SoilLocationMap.changeBasemap")
+  
