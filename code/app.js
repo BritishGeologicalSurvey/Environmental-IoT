@@ -28,10 +28,9 @@ app.use('/', rest);
 app.use('/', routes);
 
 var mongoose = require('mongoose');
-console.log("Connecting to database: mongodb://scc-mc1.lancs.ac.uk/envdata");
-var secureDataFile = require("./dbsecure");
+console.log("Connecting to local database");
 
-mongoose.connect('mongodb://scc-mc1.lancs.ac.uk/envdata', secureDataFile.dbSecureOptions, function(err) {
+mongoose.connect('mongodb://localhost/envdata', function(err) {
     if(err) {
         console.log('Connection error', err);
     } else {
