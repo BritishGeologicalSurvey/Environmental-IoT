@@ -6,6 +6,7 @@
 mongoose  = require 'mongoose'
 express   = require 'express'
 dataModel = require '../models/DataModel'
+clock     = require '../models/SensorsClock'
 
 router = express.Router()
 mongoose.set 'debug', true
@@ -29,6 +30,12 @@ router.get '/api', (req, res) ->
     ,
       sensor: req.query.sensor
     ], (err, posts) -> res.json posts
+
+###
+Get the current system time
+###
+router.get '/time', (req, res) ->
+  res.json systemTime: clock.getTime()
 
 ###
 Getting values from nodes and their sensors
