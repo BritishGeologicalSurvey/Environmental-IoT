@@ -7,8 +7,8 @@ logger       = require 'morgan'
 cookieParser = require 'cookie-parser'
 bodyParser   = require 'body-parser'
 mongoose     = require 'mongoose'
-routes       = require '../routes/Index'
-Rest         = require '../routes/Rest'
+index       = require '../routes/Index'
+rest         = require '../routes/Rest'
 
 module.exports = class
   constructor: () ->
@@ -18,7 +18,8 @@ module.exports = class
 
   connectToDatabase: ->
     console.log 'Connecting to local database'
-
+    
+    mongoose.set 'debug', true
     mongoose.connect 'mongodb://localhost/envdata', (err) ->
       if err then console.log 'Connection error', err
       else console.log 'Connection successful'
@@ -41,8 +42,8 @@ module.exports = class
 
     app.use express.static path.join __dirname, '../public'
 
-    app.use '/', rest
-    app.use '/', routes
+    app.use '/', rest()
+    app.use '/', index()
 
     # catch 404 and forward to error handler
     app.use (req, res, next) ->
