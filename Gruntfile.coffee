@@ -7,7 +7,7 @@ module.exports = (grunt) ->
     nodemon:
       dev: 
         options:
-          watch: ['!node_modules/**', '!public/**', '**/*.coffee']
+          watch: ['!node_modules/**', '!public/**', '**/*.js','**/*.coffee']
           legacyWatch: true
           delay: 300
-        script: 'helpers/main.coffee'
+        script: 'main'
