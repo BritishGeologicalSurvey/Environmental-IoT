@@ -11,3 +11,5 @@ module.exports = (grunt) ->
           legacyWatch: true
           delay: 300
         script: 'main'
+
+  grunt.registerTask 'develop', ['nodemon:dev']
