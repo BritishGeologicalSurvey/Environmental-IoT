@@ -10,8 +10,6 @@ rest         = require '../routes/rest'
 module.exports = (dataModel, clock)->
   app = express()
 
-  console.log('Node Env = ' + app.get('env'));
-
   # view engine setup
   app.set 'views', path.join __dirname, '../views'
   app.set 'view engine', 'jade'
