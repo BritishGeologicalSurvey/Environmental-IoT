@@ -17,4 +17,6 @@ module.exports = (connection, clock) ->
   oldFind = envData.find
   envData.find = (query, rest...) ->
     newQuery = $and: [ query, timestamp: $lt: clock.getTime() ]
-    oldFind newQuery, rest...
+    oldFind.apply this, [newQuery].concat rest
+
+  return envData
