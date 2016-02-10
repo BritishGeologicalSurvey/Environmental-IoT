@@ -1,5 +1,8 @@
 module.exports = (grunt) ->
   #Load grunt tasks
+  grunt.loadNpmTasks 'grunt-contrib-less'
+  grunt.loadNpmTasks 'grunt-concurrent'
+  grunt.loadNpmTasks 'grunt-contrib-watch'
   grunt.loadNpmTasks 'grunt-nodemon'
 
   #Configure tasks
@@ -7,9 +10,25 @@ module.exports = (grunt) ->
     nodemon:
       dev: 
         options:
-          watch: ['!node_modules/**', '!public/**', '**/*.js','**/*.coffee']
+          ignore: ['public', '.vagrant']
           legacyWatch: true
-          delay: 300
-        script: 'main'
+        script: 'Main.coffee'
 
-  grunt.registerTask 'develop', ['nodemon:dev']
+    less:
+      dev:
+        options:
+          compress: false
+        files: 'public/css/style.css' : 'public/less/style.less'
+    
+    watch:
+      less:
+        files: "public/less/*"
+        tasks: ['less']
+
+    concurrent:
+      watch:
+        tasks: ['watch:less', 'nodemon:dev']
+        options:
+          logConcurrentOutput: true
+
+  grunt.registerTask 'develop', ['less','concurrent:watch']

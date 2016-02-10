@@ -1,16 +1,5 @@
 extends ../components/component-box-calendar.jade
-include ../mixins/mixins-meta
 include ../mixins/mixins-dashboard
-
-append head
-  mixin css("sheep-map-trace")
-
-append foot
-  script(src='http://cdn.leafletjs.com/leaflet/v1.0.0-beta.2/leaflet.js')
-  script(src='http://cdn.jsdelivr.net/leaflet.esri/2.0.0-beta.7/esri-leaflet.js')
-  script(src='/plugins/leaflet/leaflet.label.js')
-  script(src='/js/components/sheep-map-trace.js')
-
 
 block boxHeading
   h3.box-title Sheep Position Tracers

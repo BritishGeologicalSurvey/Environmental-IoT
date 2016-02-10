@@ -28,6 +28,7 @@ module.exports = (dataModel, clock)->
 
   # catch 404 and forward to error handler
   app.use (req, res) ->
+    res.status 404
     switch
       when req.accepts 'html' then res.render '404', url: req.url
       when req.accepts 'json' then res.send error: 'Not found'
