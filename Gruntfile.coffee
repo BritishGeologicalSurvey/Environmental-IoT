@@ -10,16 +10,14 @@ module.exports = (grunt) ->
     nodemon:
       dev: 
         options:
-          watch: ['!node_modules/**', '!public/**', '**/*.js','**/*.coffee']
+          ignore: ['public', '.vagrant']
           legacyWatch: true
-          delay: 300
-        script: 'main'
+        script: 'Main.coffee'
 
     less:
       dev:
         options:
           compress: false
-          # paths: ['less', '<%= bowerDirectory %>/bootstrap/less']
         files: 'public/css/style.css' : 'public/less/style.less'
     
     watch:
