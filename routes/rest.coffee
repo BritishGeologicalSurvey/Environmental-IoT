@@ -15,7 +15,7 @@ module.exports = (dataModel, clock) ->
 
   recordsFor = (types, since, callback) ->
     query = sensor: $in: types # basic query
-    query.timestamp = "$gte": new Date since if since? 
+    query.timestamp = "$gt": new Date since if since? 
     
     dataModel.find(query, callback).sort(timestamp: 1).limit 1000
 

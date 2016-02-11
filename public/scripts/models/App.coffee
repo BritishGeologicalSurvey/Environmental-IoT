@@ -6,7 +6,7 @@ define [
     @sheep = new Sheep
     @listenTo @sheep, 'add', @newRecords
 
-    do @sheep.fetch
-    setInterval( (=> do @sheep.more), 4000)
+    do @sheep.poll
 
-  newRecords: -> console.log "We now have #{@sheep.length}"
+  newRecords: (m)-> 
+    console.log m.attributes._id
