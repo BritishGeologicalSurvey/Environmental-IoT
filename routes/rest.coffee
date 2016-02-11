@@ -34,6 +34,33 @@ module.exports = (dataModel, clock) ->
     res.json systemTime: clock.getTime()
 
   ###
+  Get the latest sheep data
+  Optionally return just the latest records after a specified datetime query param
+  ###
+  router.get '/sheep', (req, res) ->
+    dataModel.find(sensor: "gps",(err, posts) ->  res.json posts)
+    .sort(timestamp: -1)
+    .limit 1000
+
+  ###
+  Get the latest soil data
+  Optionally return just the latest records after a specified datetime query param
+  ###
+  router.get '/soil', (req, res) ->
+    dataModel.find(sensor: {$in: ["soil","soil1","soil2"]},(err, posts) ->  res.json posts)
+    .sort(timestamp: -1)
+    .limit 1000
+
+  ###
+  Get the latest met station data
+  Optionally return just the latest records after a specified datetime query param
+  ###
+  router.get '/metstation', (req, res) ->
+    dataModel.find(sensor: "metstation",(err, posts) ->  res.json posts)
+    .sort(timestamp: -1)
+    .limit 1000
+
+  ###
   Getting values from nodes and their sensors
   ###
   router.get '/querynode', (req, res)->
