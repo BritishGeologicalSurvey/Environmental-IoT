@@ -17,7 +17,7 @@ module.exports = (dataModel, clock) ->
     query = sensor: $in: types # basic query
     query.timestamp = "$gt": new Date since if since? 
     
-    dataModel.find(query, callback).sort(timestamp: -1).limit 1000
+    dataModel.find(query, callback).sort(timestamp: -1).limit 10
 
   ###
   Get the latest sheep data

@@ -1,12 +1,20 @@
 define [
   "backbone"
   "cs!collections/Sheep"
-], (Backbone, Sheep)-> Backbone.Model.extend
+  "cs!collections/Nodes"
+], (Backbone, Sheep, Nodes)-> Backbone.Model.extend
+  
   initialize: ->
+    @sheepNodes = new Nodes
+
     @sheep = new Sheep
-    @listenTo @sheep, 'add', @newRecords
+    @listenTo @sheep, 'add', @updateSheepNodes
+    do @sheep.poll # Start repeated listening
 
-    do @sheep.poll
-
-  newRecords: (m)-> 
-    console.log m.attributes._id
+  ###
+  Listen to events triggered by the sheep observations and allocate to 
+  individual sheep nodes
+  ###
+  updateSheepNodes: (m) ->
+    @sheepNodes.add id: m.get 'address'
+    @sheepNodes.get(m.get 'address').observations.add m

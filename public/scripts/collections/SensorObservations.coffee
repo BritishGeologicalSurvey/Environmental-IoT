@@ -5,6 +5,10 @@ define [
 
   idAttribute: '_id'
 
+  ###
+  Perform an initial fetch and then get the latest data every <interval>
+  milliseconds
+  ###
   poll: (interval = 5000) -> @fetch().always => @repeat interval
 
   ###
