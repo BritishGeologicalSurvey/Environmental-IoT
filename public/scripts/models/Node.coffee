@@ -1,5 +1,5 @@
 define [
   "backbone"
-], (Backbone, Sheep)-> Backbone.Model.extend
+], (Backbone)-> Backbone.Model.extend
   initialize: ->
     @observations = new Backbone.Collection

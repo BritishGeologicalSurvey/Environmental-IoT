@@ -16,7 +16,10 @@ module.exports = (connection, clock) ->
   # to timestamp less than the current clock time
   oldFind = envData.find
   envData.find = (query, rest...) ->
-    newQuery = $and: [ query, timestamp: $lt: clock.getTime() ]
+    newQuery = $and: [ query, 
+      timestamp: $lt: clock.getTime()
+      address: $exists: true 
+    ]
     oldFind.apply this, [newQuery].concat rest
 
   return envData
