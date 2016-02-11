@@ -8,100 +8,35 @@ module.exports = (dataModel, clock) ->
   router = express.Router()
 
   ###
-    Query Building from URL params
-    Expecting:
-    - e.g. http://<sitelocation>:<port>/api?sensor=sheep&starttime=xxxxx&endtime=xxxxx
-    - sensor=sheep or sensor=soil
-    - starttime=xxxxx (ISO Date format)
-    - endtime=xxxxx (ISO Date format)
-
-    http://localhost:3000/querynode?nodeid=A6&starttime=2015-12-01T16:21:04.657Z&endtime=2015-12-25T16:21:04.657Z
-  ###
-  router.get '/api', (req, res) ->
-    dataModel.find
-      $and: [
-        timestamp:
-          "$gte": new Date req.query.starttime
-          "$lt":  new Date req.query.endtime
-      ,
-        sensor: req.query.sensor
-      ], (err, posts) -> res.json posts
-
-  ###
   Get the current system time
   ###
   router.get '/time', (req, res) ->
     res.json systemTime: clock.getTime()
 
+  recordsFor = (types, since, callback) ->
+    query = sensor: $in: types # basic query
+    query.timestamp = "$gte": new Date since if since? 
+    
+    dataModel.find(query, callback).sort(timestamp: 1).limit 1000
+
   ###
   Get the latest sheep data
   Optionally return just the latest records after a specified datetime query param
   ###
-  router.get '/sheep', (req, res) ->
-    dataModel.find(sensor: "gps",(err, posts) ->  res.json posts)
-    .sort(timestamp: -1)
-    .limit 1000
+  router.get '/sheep', (req, res) -> 
+    recordsFor ['gps'], req.query.since, (err, data) ->  res.json data
 
   ###
   Get the latest soil data
   Optionally return just the latest records after a specified datetime query param
   ###
   router.get '/soil', (req, res) ->
-    dataModel.find(sensor: {$in: ["soil","soil1","soil2"]},(err, posts) ->  res.json posts)
-    .sort(timestamp: -1)
-    .limit 1000
-
+    recordsFor ['soil','soil1','soil2'], req.query.since, (err, data) ->  res.json data
+    
   ###
   Get the latest met station data
   Optionally return just the latest records after a specified datetime query param
   ###
   router.get '/metstation', (req, res) ->
-    dataModel.find(sensor: "metstation",(err, posts) ->  res.json posts)
-    .sort(timestamp: -1)
-    .limit 1000
-
-  ###
-  Getting values from nodes and their sensors
-  ###
-  router.get '/querynode', (req, res)->
-    moisture_exists = req.query.packet is 1
-
-    dataModel.find
-      $and: [
-        timestamp: 
-          "$gte": new Date req.query.starttime
-          "$lt":  new Date req.query.endtime
-      ,
-        address: req.query.nodeid
-        soil_moisture_1: $exists: moisture_exists
-      ], (err, posts) ->  res.json posts
-
-  router.get '/querysoil', (req, res)->
-    dataModel.find
-      $and: [
-        timestamp: 
-          "$gte": new Date req.query.starttime
-          "$lt": new Date req.query.endtime
-      ,
-        address: req.query.nodeid
-      ], (err, posts) -> res.json posts
-
-  ###
-  Get all the points up to a limit of 50
-  ###
-  router.get '/api/points', (req, res, next)->
-    dataModel.find {}, (err, posts)->
-        if not err then res.json posts
-        else throw err
-    .limit 50
-
-  ###
-  Get a single point by its id.
-  ###
-  router.get '/api/points/:id', (req, res, next)->
-    dataModel.findById req.params.id, (err, results)->
-      if err then return next err
-      if not results then res.send "NODATA"
-      else res.json results
-
-  return router
+    recordsFor ['metstation'], req.query.since, (err, data) ->  res.json data
+    
