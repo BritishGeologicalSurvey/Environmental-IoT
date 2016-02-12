@@ -5,4 +5,4 @@ define [
 ], ($, Backbone, SheepPositionMap)-> Backbone.View.extend
 
   initialize: ->
-    @SheepPositionMap = new SheepPositionMap collection: @model.sheepNodes
+    @SheepPositionMap = new SheepPositionMap collection: @model.sheep.nodes
