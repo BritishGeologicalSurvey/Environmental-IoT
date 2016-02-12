@@ -4,7 +4,7 @@
 ###
 express = require 'express'
 
-module.exports = (dataModel, clock) ->
+module.exports = (envdata, nodeRegistry, clock) ->
   router = express.Router()
 
   ###
@@ -17,7 +17,7 @@ module.exports = (dataModel, clock) ->
     query = sensor: $in: types # basic query
     query.timestamp = "$gt": new Date since if since? 
     
-    dataModel.find(query, callback).sort(timestamp: -1).limit 10
+    envdata.find(query, callback).sort(timestamp: -1).limit 10
 
   ###
   Get the latest sheep data
@@ -40,3 +40,5 @@ module.exports = (dataModel, clock) ->
   router.get '/metstation', (req, res) ->
     recordsFor ['metstation'], req.query.since, (err, data) ->  res.json data.reverse()
     
+  router.get '/nodes', (req, res) -> 
+    nodeRegistry.find (err,data) -> res.json data
