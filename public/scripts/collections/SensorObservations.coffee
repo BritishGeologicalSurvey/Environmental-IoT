@@ -23,7 +23,7 @@ define [
   ###
   Repeatedly poll the server for more date after a given interval
   ###
-  poll: (after = 5000) -> _.delay (=> @more().always => @poll after), after
+  poll: (after = 5000) -> @more().always =>_.delay (=> @poll after), after
 
   ###
   Get the latest set of data from the end point
