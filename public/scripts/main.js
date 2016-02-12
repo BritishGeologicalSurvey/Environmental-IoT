@@ -12,6 +12,7 @@ require.config({
     'tpl':           '../vendor/requirejs-tpl/tpl',
     'text':          '../vendor/requirejs-text/text',
     'jquery':        '../vendor/jquery/dist/jquery',
+    'sparkline':     '../vendor/AdminLTE/plugins/sparkline/jquery.sparkline',
     'underscore':    '../vendor/underscore/underscore'
   },
   waitSeconds:1000
