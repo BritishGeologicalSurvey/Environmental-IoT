@@ -24,7 +24,8 @@ block sectionContentTop
   include includes/ops-update-timeline.jade
 
 block sectionContentLeftCol
-  +placeholderSmallBox("10 /18", "Node Status", "134 / 156", "Sensor Status")
+  .row
+    +smallBox("nodeStatus", "Node Status")
   //- +placeholderBox("System status")
   include includes/site-location-map.jade
   include includes/ops-sensormodule-list.jade
