@@ -19,7 +19,7 @@
       </div>
       <div class="product-info">
         <a href="javascript::;" class="product-title">Sensor Location</a>
-        <div id="sensorModuleListSensorLocation" class="span product-description">Easting: 123456 | Northing: 567890 | Elevation: 342m</div>
+        <div id="sensorModuleListSensorLocation" class="span product-description">Lat: <%=lat%> | Lon: <%=lon%></div>
       </div>
     </li>
   </ul>

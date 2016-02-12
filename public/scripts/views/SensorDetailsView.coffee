@@ -26,7 +26,7 @@ define [
   initialize: ->
     @listenTo @model.observations, 'add', @refresh
     do @refresh
-    
+
   refresh:->
     data = _.map @fields, (f) =>
       latest = _.filter @model.observations.pluck(f.key), (v) -> v
@@ -37,6 +37,8 @@ define [
     @$el.html template 
       data:    data
       id:      @model.id
+      lat:     @model.get 'lat'
+      lon:     @model.get 'lon'
       updated: @model.observations.last().get 'timestamp'
 
     @$('.sparkbar').sparkline 'html', type: 'bar'
