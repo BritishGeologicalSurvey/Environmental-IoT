@@ -10,4 +10,4 @@ define [
       @sheepPositionMap = new SheepPositionMap collection: @model.sheep.nodes
 
     if $(SensorPositionView.prototype.el).length
-      @sensorPositionView = new SensorPositionView model: @model.soil.nodes
+      @sensorPositionView = new SensorPositionView collection: @model.soil.nodes

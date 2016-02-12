@@ -25,6 +25,7 @@ define [
 
   initialize: ->
     @listenTo @model.observations, 'add', @refresh
+    do @refresh
     
   refresh:->
     data = _.map @fields, (f) =>
