@@ -15,28 +15,28 @@ module.exports = (dataModel, clock) ->
 
   recordsFor = (types, since, callback) ->
     query = sensor: $in: types # basic query
-    query.timestamp = "$gte": new Date since if since? 
+    query.timestamp = "$gt": new Date since if since? 
     
-    dataModel.find(query, callback).sort(timestamp: 1).limit 1000
+    dataModel.find(query, callback).sort(timestamp: -1).limit 10
 
   ###
   Get the latest sheep data
   Optionally return just the latest records after a specified datetime query param
   ###
   router.get '/sheep', (req, res) -> 
-    recordsFor ['gps'], req.query.since, (err, data) ->  res.json data
+    recordsFor ['gps'], req.query.since, (err, data) ->  res.json data.reverse()
 
   ###
   Get the latest soil data
   Optionally return just the latest records after a specified datetime query param
   ###
   router.get '/soil', (req, res) ->
-    recordsFor ['soil','soil1','soil2'], req.query.since, (err, data) ->  res.json data
+    recordsFor ['soil','soil1','soil2'], req.query.since, (err, data) ->  res.json data.reverse()
     
   ###
   Get the latest met station data
   Optionally return just the latest records after a specified datetime query param
   ###
   router.get '/metstation', (req, res) ->
-    recordsFor ['metstation'], req.query.since, (err, data) ->  res.json data
+    recordsFor ['metstation'], req.query.since, (err, data) ->  res.json data.reverse()
     

@@ -1,4 +1,8 @@
 define [
-  "jquery"
-  "backbone"
-], ($, Backbone)-> Backbone.View.extend
+  'jquery'
+  'backbone'
+  'cs!views/SheepPositionMap'
+], ($, Backbone, SheepPositionMap)-> Backbone.View.extend
+
+  initialize: ->
+    @SheepPositionMap = new SheepPositionMap collection: @model.sheepNodes
