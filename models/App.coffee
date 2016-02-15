@@ -2,21 +2,22 @@ mongoose     = require 'mongoose'
 
 server       = require './server'
 express      = require './express'
-dataModel    = require './dataModel'
+envData      = require './EnvData'
+nodeRegistry = require './NodeRegistry'
 FakeClock    = require './FakeClock'
 
 module.exports = class
   constructor: () ->
-    @clock     = @createClock()
-    @database  = @connectToDatabase()
-    @dataModel = dataModel @database, @clock
-    @express   = express @dataModel, @clock
+    @clock        = @createClock()
+    @database     = @connectToDatabase()
+    @envData      = envData @database, @clock
+    @nodeRegistry = nodeRegistry @database
+    @express      = express @envData, @nodeRegistry, @clock
     server(@express)
 
   connectToDatabase: ->
     console.log 'Connecting to local database'
     
-    mongoose.set 'debug', true
     mongoose.connect 'mongodb://localhost/envdata', (err) ->
       if err then console.log 'Connection error', err
       else console.log 'Connection successful'

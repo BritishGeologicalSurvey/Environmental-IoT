@@ -1,8 +1,15 @@
 define [
   "backbone"
+  'cs!collections/NodeRegistry'
+  "cs!collections/Soil"
   "cs!collections/Sheep"
-], (Backbone, Sheep)-> Backbone.Model.extend
+], (Backbone, NodeRegistry, Soil, Sheep)-> Backbone.Model.extend
   
   initialize: ->
-    @sheep = new Sheep
-    do @sheep.poll # Start repeated listening
+    @nodeRegistry = new NodeRegistry
+    @soil  = new Soil  [], registry: @nodeRegistry
+    @sheep = new Sheep [], registry: @nodeRegistry
+
+    @nodeRegistry.fetch().complete =>
+      do @soil.poll  # Start repeated listening
+      do @sheep.poll
