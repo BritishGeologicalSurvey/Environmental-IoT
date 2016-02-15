@@ -17,7 +17,7 @@ module.exports = (envdata, nodeRegistry, clock) ->
     query = sensor: $in: types # basic query
     query.timestamp = "$gt": new Date since if since? 
     
-    envdata.find(query, callback).sort(timestamp: -1).limit 10
+    envdata.find(query, callback).sort(timestamp: -1).limit 100
 
   ###
   Get the latest sheep data

@@ -6,7 +6,6 @@ define [
   'cs!views/NodeStatusView'
   'cs!views/SoilMoistureView'
 ], ($, Backbone, SheepPositionMap, SensorPositionView, NodeStatusView, SoilMoistureView)-> Backbone.View.extend
-  'cs!views/SoilMoistureChart'
 
   initialize: ->
     if $(SheepPositionMap.prototype.el).length

@@ -5,20 +5,75 @@ define [
   'amstock'
 ], ($, Backbone, amcharts)-> Backbone.View.extend
   el: '#soil-moisture-chart'
+
+
+  getData: ->
+    [
+      timestamp: "2015-12-04T11:28:17.946Z"
+      temp: "8.4"
+    ,
+      timestamp: "2015-12-04T11:29:17.946Z"
+      temp: "8.0"
+    ,
+      timestamp: "2015-12-04T11:30:17.946Z"
+      temp: "8.9"
+    ]
+
   
   initialize:->
-    console.log do @chartSettings
-    console.log amcharts
     @chart = amcharts.makeChart @el, @chartSettings()
+    @listenTo @collection, 'add', @updateChart
+    # do @hardcoded
 
-    # @listenTo @collection, 'add', @updateChart
 
-  # updateChart: ->
-  #   console.log 'update chart'
+  hardcoded: ->
+    console.log do @getData
+    @chart.dataSets.push
+      dataProvider: do @getData
+      title: 'my chart'
+      fieldMappings: 
+        [
+          fromField: 'temp',
+          toField: 'value'
+        ]
+      categoryField: "timestamp"
+      compared: true
+    do @chart.validateData
+
+  updateChart: (node) ->
+    node.observations.on 'add', (obs) =>
+      console.log node.id
+      if node.id == 'AF'
+        console.log do node.observations.toJSON
+        sensor = "soil_1"
+        title = node.id + " " + sensor
+        dataProvider = _.findWhere(@chart.dataSets, {'title': title})
+        if not dataProvider
+          console.log 'adding'
+          @chart.dataSets.push
+            dataProvider: do node.observations.toJSON
+            title: title
+            fieldMappings: 
+              [
+                fromField: 'air_temp_1'
+                toField: 'value'
+              ]
+            categoryField: 'timestamp'
+            compared: true
+        else
+          if obs.get('air_temp_1')
+            console.log 'updating'
+            console.log obs.toJSON()
+            console.log dataProvider.dataProvider
+            dataProvider.dataProvider.push obs.toJSON()
+          else
+            console.log 'attribute not found'
+    do @chart.validateData
+
 
   chartSettings: ->
     categoryAxesSettings:
-      minPeriod: 'mm'
+      minPeriod: 'ss'
       groupToPeriods: [
         'mm'
         '10mm'

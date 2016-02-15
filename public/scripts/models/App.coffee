@@ -11,5 +11,5 @@ define [
     @sheep = new Sheep [], registry: @nodeRegistry
 
     @nodeRegistry.fetch().complete =>
-      do @soil.poll  # Start repeated listening
+      do @soil.poll
       do @sheep.poll
