@@ -16,7 +16,18 @@ define [
       @sensorPositionView = new SensorPositionView collection: @model.soil.nodes
 
     if $(NodeStatusView.prototype.el).length
-      @nodeStatusView = new NodeStatusView model: @model
+      @nodeStatusView = new NodeStatusView 
+        collection:   @model.soil.nodes
+        nodeRegistry: @model.nodeRegistry
+        type:         'Soil'
+
+    sheepNodeStatusEl = '#sheepNodeStatus'
+    if $(sheepNodeStatusEl).length
+      @nodeStatusView = new NodeStatusView 
+        collection:   @model.sheep.nodes
+        nodeRegistry: @model.nodeRegistry
+        type:         'Sheep'
+        el:           sheepNodeStatusEl
 
     if $(SoilMoistureView.prototype.el).length
       @SoilMoistureView = new SoilMoistureView collection: @model.soil.nodes
