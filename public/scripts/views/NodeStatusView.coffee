@@ -12,6 +12,6 @@ define [
   ###
   refresh: ->
     online = @model.soil.nodes.length
-    known = @model.nodeRegistry.length
+    known = @model.nodeRegistry.where(node_type:'Soil').length
 
     @$('h3').html "#{online} / #{known}"
