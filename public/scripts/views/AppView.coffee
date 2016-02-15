@@ -4,7 +4,8 @@ define [
   'cs!views/SheepPositionMap'
   'cs!views/SensorPositionView'
   'cs!views/NodeStatusView'
-], ($, Backbone, SheepPositionMap, SensorPositionView, NodeStatusView, SoilMoistureChart)-> Backbone.View.extend
+  'cs!views/SoilMoistureView'
+], ($, Backbone, SheepPositionMap, SensorPositionView, NodeStatusView, SoilMoistureView)-> Backbone.View.extend
   'cs!views/SoilMoistureChart'
 
   initialize: ->
@@ -17,5 +18,5 @@ define [
     if $(NodeStatusView.prototype.el).length
       @nodeStatusView = new NodeStatusView model: @model
 
-	    if $(SoilMoistureChart.prototype.el).length
-    @SoilMoistureChart = new SoilMoistureChart collection: @model.soil.nodes
+    if $(SoilMoistureView.prototype.el).length
+      @SoilMoistureView = new SoilMoistureView collection: @model.soil.nodes
