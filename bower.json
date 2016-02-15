@@ -14,6 +14,7 @@
     "requirejs-text": "2.0.14",
     "require-cs":     "0.5.0",
     "requirejs-tpl":  "7438735aa84b76af0fb266d8373b5fbaab2a1a03",
-    "amcharts2":       "2.9.0"
+    "amcharts3":      "3.19.2",
+    "amstock3":       "3.19.2"
   }
 }

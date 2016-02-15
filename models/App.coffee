@@ -16,7 +16,6 @@ module.exports = class
   connectToDatabase: ->
     console.log 'Connecting to local database'
     
-    mongoose.set 'debug', true
     mongoose.connect 'mongodb://localhost/envdata', (err) ->
       if err then console.log 'Connection error', err
       else console.log 'Connection successful'

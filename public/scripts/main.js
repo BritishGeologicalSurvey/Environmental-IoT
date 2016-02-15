@@ -2,6 +2,9 @@ require.config({
   stubModules: ['cs', 'tpl'],
   shim: {
     'bootstrap': { deps: ['jquery']},
+    'amcharts': { exports: 'AmCharts' },
+    'amstock': {deps: ['serial'] },
+    'serial': { deps: ['amcharts'] }
   },
   paths: {
     'backbone':      '../vendor/backbone/backbone',
@@ -12,7 +15,10 @@ require.config({
     'tpl':           '../vendor/requirejs-tpl/tpl',
     'text':          '../vendor/requirejs-text/text',
     'jquery':        '../vendor/jquery/dist/jquery',
-    'underscore':    '../vendor/underscore/underscore'
+    'underscore':    '../vendor/underscore/underscore',
+    'amcharts':      '../vendor/amstock3/amcharts/amcharts',
+    'amstock':       '../vendor/amstock3/amcharts/amstock',
+    'serial':        '../vendor/amstock3/amcharts/serial'
   },
   waitSeconds:1000
 });
