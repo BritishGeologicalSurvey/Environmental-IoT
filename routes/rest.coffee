@@ -40,5 +40,34 @@ module.exports = (envdata, nodeRegistry, clock) ->
   router.get '/metstation', (req, res) ->
     recordsFor ['metstation'], req.query.since, (err, data) ->  res.json data.reverse()
     
-  router.get '/nodes', (req, res) -> 
-    nodeRegistry.find (err,data) -> res.json data
+  router.get '/nodes', (req, res) ->
+    sheep = [
+        address:   '[{\"interface-type\":\"SHEEP\",\"address\":\"0xd0\"}]'
+        node_type: 'Sheep'
+        icon:      '/img/Blue-Sheep.png'
+      ,
+        address:   '[{\"interface-type\":\"SHEEP\",\"address\":\"0xd1\"}]'
+        node_type: 'Sheep'
+        icon:      '/img/Green-Sheep.png'
+      ,
+        address:   '[{\"interface-type\":\"SHEEP\",\"address\":\"0x1f6\"}]'
+        node_type: 'Sheep'
+        icon:      '/img/Orange-Sheep.png'
+      ,
+        address:   '[{\"interface-type\":\"SHEEP\",\"address\":\"0x0\"}]'
+        node_type: 'Sheep'
+        icon:      '/img/Purple-Sheep.png'
+      ,
+        address:   '[{\"interface-type\":\"SHEEP\",\"address\":\"0xff\"}]'
+        node_type: 'Sheep'
+        icon:      '/img/Red-Sheep.png'
+      ,
+        address:   '[{\"interface-type\":\"SHEEP\",\"address\":\"0xd3\"}]'
+        node_type: 'Sheep'
+        icon:      '/img/Turquoise-Sheep.png'
+      ,
+        address:   '[{\"interface-type\":\"SHEEP\",\"address\":211}]'
+        node_type: 'Sheep'
+        icon:      '/img/Yellow-Sheep.png'
+    ]
+    nodeRegistry.find (err,data) -> res.json sheep.concat data
