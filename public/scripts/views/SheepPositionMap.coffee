@@ -12,7 +12,8 @@ define [
     @listenTo @collection, 'add', @addMarker
 
   addMarker: (node) ->
-    marker = L.marker([0,0]).addTo(@map)
+    marker = L.marker([0,0]).addTo @markers
 
-    node.observations.on 'add', (obs) ->
+    node.observations.on 'add', (obs) =>
       marker.setLatLng obs.pick 'lat', 'lon'
+      do @fitBounds
