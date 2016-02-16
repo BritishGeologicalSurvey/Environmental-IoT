@@ -15,9 +15,11 @@ module.exports = (envdata, nodeRegistry, clock) ->
 
   recordsFor = (types, since, callback) ->
     query = sensor: $in: types # basic query
-    query.timestamp = "$gt": new Date since if since? 
     
-    envdata.find(query, callback).sort(timestamp: -1).limit 10
+    yesterday = clock.getTime() - 24 * 60 * 60 * 1000
+    query.timestamp = $gt: new Date if since? then since else yesterday
+    
+    envdata.find(query, callback).sort(timestamp: -1)
 
   ###
   Get the latest sheep data
