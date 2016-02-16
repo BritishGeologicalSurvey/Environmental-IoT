@@ -37,4 +37,4 @@ define [
       @sheepStatusView = new SheepStatusView model: @model
 
     if $(SheepHeatMapView.prototype.el).length
-      @sheepHeatMapView = new SheepHeatMapView collection: @model.sheep
+      @sheepHeatMapView = new SheepHeatMapView model: @model
