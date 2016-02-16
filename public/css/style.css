@@ -4,9 +4,7 @@
 @import '../vendor/AdminLTE/plugins/jvectormap/jquery-jvectormap-1.2.2.css';
 @import '../vendor/AdminLTE/dist/css/AdminLTE.css';
 @import '../vendor/animate.css/animate.css';
-@import 'http://cdn.leafletjs.com/leaflet/v1.0.0-beta.2/leaflet.css';
-@import 'https://js.arcgis.com/3.15/dijit/themes/claro/claro.css';
-@import 'https://js.arcgis.com/3.15/esri/css/esri.css';
+@import '../vendor/leaflet/dist/leaflet.css';
 @import '../vendor/AdminLTE/plugins/daterangepicker/daterangepicker-bs3.css';
 @import '../vendor/AdminLTE/plugins/datetimepicker/bootstrap-datetimepicker.css';
 @import '../vendor/AdminLTE/dist/css/skins/skin-black-light.css';
