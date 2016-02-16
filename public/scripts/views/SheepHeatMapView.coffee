@@ -33,7 +33,7 @@ define [
     else
       @$('.badge').hide()
       @leaflet.map.removeLayer @liveHeatLayer
-      do @loadHistoricHeatLayer
+      @loadHistoricHeatLayer evt.date.toDate()
 
   ###
   Request the sheep collection from the @model for a particular date. 
@@ -41,10 +41,10 @@ define [
   ###
   loadHistoricHeatLayer: (date) ->
     do @showOverlay
-    historicSheep = @model.getHistoricSheep(date)
+    historicSheep = @model.createSheep()
     @historicHeatLayer = @createHeatMap(historicSheep)
     @leaflet.map.addLayer @historicHeatLayer
-    historicSheep.fetch().complete => @hideOverlay()
+    historicSheep.since(date).complete => @hideOverlay()
 
   ###
   Fade the loading overlay in

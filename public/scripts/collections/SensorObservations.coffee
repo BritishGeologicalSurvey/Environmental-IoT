@@ -29,3 +29,9 @@ define [
   Get the latest set of data from the end point
   ###
   more: -> @fetch remove: false, data: since: @last()?.get 'timestamp'
+
+  ###
+  Fetch some sensor observation data for a particular date. The rest api will
+  only return 24 hours worth of data, so this will only fill up a single day
+  ###
+  since: (date) -> @fetch data: since: date.toISOString()

@@ -14,10 +14,16 @@ module.exports = (envdata, nodeRegistry, clock) ->
     res.json systemTime: clock.getTime()
 
   recordsFor = (types, since, callback) ->
-    query = sensor: $in: types # basic query
-    
-    yesterday = clock.getTime() - 24 * 60 * 60 * 1000
-    query.timestamp = $gt: new Date if since? then since else yesterday
+    twentyFourHours = 24 * 60 * 60 * 1000
+    yesterday = clock.getTime() - twentyFourHours
+
+    timestamp = new Date if since? then since else yesterday
+
+    query = 
+      sensor: $in: types # basic query
+      timestamp:
+        $gt: timestamp
+        $lt: new Date timestamp.getTime() + twentyFourHours
     
     envdata.find(query, callback).sort(timestamp: -1)
 
