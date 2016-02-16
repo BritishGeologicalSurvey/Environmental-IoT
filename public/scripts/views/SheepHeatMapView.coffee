@@ -4,15 +4,19 @@ define [
   'cs!views/LeafletMapView'
   'leaflet'
   'leaflet-heat'
-], ($, Backbone, LeafletMapView, L) -> LeafletMapView.extend
-  el: '#sheepHeatMap'
+  'bootstrap-datetimepicker'
+], ($, Backbone, LeafletMapView, L) -> Backbone.View.extend
+  el: '#sheepHeatMapDiv'
   
   initialize:->
-    LeafletMapView.prototype.initialize.apply this, arguments
+    @leaflet = new LeafletMapView el: '#sheepHeatMap'
 
     @listenTo @collection, 'add', @addObservation
-    @heatLayer = L.heatLayer([]).addTo @map
+    @heatLayer = L.heatLayer([]).addTo @leaflet.map
 
+
+    @$('.date').datetimepicker format: 'YYYY-MM-DD'
+    
   addObservation: (obs) ->
     lat = obs.get 'lat'
     lon = obs.get 'lon'

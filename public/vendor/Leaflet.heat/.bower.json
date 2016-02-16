@@ -16,12 +16,10 @@
   ],
   "_release": "39164a6fbc",
   "_resolution": {
-    "type": "branch",
-    "branch": "master",
+    "type": "commit",
     "commit": "39164a6fbc78ab541adc27243d1a5957ceb4e0ff"
   },
   "_source": "git://github.com/johnthillaye/Leaflet.heat.git",
-  "_target": "*",
-  "_originalSource": "Leaflet.heat",
-  "_direct": true
+  "_target": "39164a6fbc78ab541adc27243d1a5957ceb4e0ff",
+  "_originalSource": "Leaflet.heat"
 }

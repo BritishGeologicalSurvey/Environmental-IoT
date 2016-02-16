@@ -6,7 +6,7 @@
 @import '../vendor/animate.css/animate.css';
 @import '../vendor/leaflet/dist/leaflet.css';
 @import '../vendor/AdminLTE/plugins/daterangepicker/daterangepicker-bs3.css';
-@import '../vendor/AdminLTE/plugins/datetimepicker/bootstrap-datetimepicker.css';
+@import '../vendor/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.css';
 @import '../vendor/AdminLTE/dist/css/skins/skin-black-light.css';
 #basemaps-wrapper {
   position: absolute;

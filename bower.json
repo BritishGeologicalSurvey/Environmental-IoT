@@ -16,6 +16,7 @@
     "requirejs-tpl": "7438735aa84b76af0fb266d8373b5fbaab2a1a03",
     "amcharts3": "3.19.2",
     "amstock3": "3.19.2",
-    "leaflet.heat": "leaflet.heat#39164a6fbc"
+    "Leaflet.heat": "39164a6fbc78ab541adc27243d1a5957ceb4e0ff",
+    "eonasdan-bootstrap-datetimepicker": "4.17.37"
   }
 }
