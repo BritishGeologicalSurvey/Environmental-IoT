@@ -4,7 +4,8 @@ require.config({
     'bootstrap': { deps: ['jquery']},
     'amcharts': { exports: 'AmCharts' },
     'amstock': {deps: ['serial'] },
-    'serial': { deps: ['amcharts'] }
+    'serial': { deps: ['amcharts'] },
+    'leaflet-heat': { deps: ['leaflet'] }
   },
   paths: {
     'backbone':      '../vendor/backbone/backbone',
@@ -12,6 +13,7 @@ require.config({
     'cs':            '../vendor/require-cs/cs',
     'coffee-script': '../vendor/coffee-script/extras/coffee-script',
     'leaflet':       '../vendor/leaflet/dist/leaflet',
+    'leaflet-heat':  '../vendor/leaflet.heat/dist/leaflet-heat',
     'tpl':           '../vendor/requirejs-tpl/tpl',
     'text':          '../vendor/requirejs-text/text',
     'jquery':        '../vendor/jquery/dist/jquery',
