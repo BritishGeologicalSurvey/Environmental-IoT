@@ -12,7 +12,7 @@ define [
     @soil  = @createSoil()
     @sheep = @createSheep()
 
-    @clock.fetch()
+    @clock.poll()
     @nodeRegistry.fetch().complete =>
       do @soil.poll  # Start repeated listening
       do @sheep.poll
