@@ -32,7 +32,8 @@ define [
         <p>Sensor: #{node.id}<br/>
         <a node='#{node.id}'>View Sensor Modules</a></p>
       """)
-      .addTo @map
+      .addTo @markers
+      do @fitBounds
   
   ###
   Event handler for <a> clicks in leaflet popups. Open a detailed sensor view

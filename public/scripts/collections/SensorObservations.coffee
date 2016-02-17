@@ -18,7 +18,7 @@ define [
   ###
   updateNodes: (m) ->
     @nodes.add @registry.byAddress m.get 'address'
-    @nodes.get(m.get 'address').observations.add m
+    @nodes.get(m.get 'address').addObservation m
 
   ###
   Repeatedly poll the server for more date after a given interval

@@ -10,3 +10,11 @@ define [
       attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
 
     osm.addTo @map
+    
+    @markers = L.featureGroup([]).addTo @map
+
+  ###
+  Zoom the map to the bounds of the markers which have been added to the 
+  @markers collection
+  ###
+  fitBounds: -> @map.fitBounds @markers.getBounds()
