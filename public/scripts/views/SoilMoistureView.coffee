@@ -1,75 +1,62 @@
 define [
+  'underscore'
   'jquery'
   'backbone'
   'amcharts'
   'amstock'
-], ($, Backbone, amcharts)-> Backbone.View.extend
+], (_, $, Backbone, amcharts)-> Backbone.View.extend
   el: '#soil-moisture-chart'
 
-
-  getData: ->
-    [
-      timestamp: "2015-12-04T11:28:17.946Z"
-      temp: "8.4"
+  sensors: [
+      'field':'soil_moisture_1', 'title':'Deep'
     ,
-      timestamp: "2015-12-04T11:29:17.946Z"
-      temp: "8.0"
+      'field':'soil_moisture_2', 'title':'Surface'
     ,
-      timestamp: "2015-12-04T11:30:17.946Z"
-      temp: "8.9"
-    ]
+      'field':'soil_moisture_3', 'title':'Shallow'
+  ]
 
-  
   initialize:->
     @chart = amcharts.makeChart @el, @chartSettings()
     @listenTo @collection, 'add', @updateChart
-    # do @hardcoded
 
+  ###
+  Plot the moisture data for the currently selected node.  If no node has been selected then use
+  the first one that data is recieved from.
+  ###
+  updateChart: (node) ->
+    if not @nodeid?
+      @nodeid = node.id
 
-  hardcoded: ->
-    console.log do @getData
+    if node.id == @nodeid
+      node.observations.on 'add', (obs) =>
+        sensorType = obs.get 'sensor'
+        _.chain(@sensors).filter((f) -> obs.has(f.field) ).each (sensor) =>
+          datasetTitle = node.id + " " + sensor.title
+          dataProvider = _.findWhere(@chart.dataSets, {'title': datasetTitle})
+          if not dataProvider
+            @addToChart obs, node, datasetTitle, sensor
+          else
+            @endDate = new Date(obs.get('timestamp'))
+            dataProvider.dataProvider.push obs.toJSON()
+          do @chart.validateData
+          @chart.zoom @startDate, @endDate
+
+  ###
+  Add a dataset to the chart
+  ###
+  addToChart: (obs, node, datasetTitle, sensor) ->
+    @startDate = new Date(obs.get('timestamp'))
+    @endDate = new Date(obs.get('timestamp'))
     @chart.dataSets.push
-      dataProvider: do @getData
-      title: 'my chart'
+      dataProvider: do node.observations.toJSON
+      title: datasetTitle
       fieldMappings: 
         [
-          fromField: 'temp',
+          fromField: sensor.field
           toField: 'value'
         ]
-      categoryField: "timestamp"
+      categoryField: 'timestamp'
       compared: true
-    do @chart.validateData
-
-  updateChart: (node) ->
-    node.observations.on 'add', (obs) =>
-      console.log node.id
-      if node.id == 'AF'
-        console.log do node.observations.toJSON
-        sensor = "soil_1"
-        title = node.id + " " + sensor
-        dataProvider = _.findWhere(@chart.dataSets, {'title': title})
-        if not dataProvider
-          console.log 'adding'
-          @chart.dataSets.push
-            dataProvider: do node.observations.toJSON
-            title: title
-            fieldMappings: 
-              [
-                fromField: 'air_temp_1'
-                toField: 'value'
-              ]
-            categoryField: 'timestamp'
-            compared: true
-        else
-          if obs.get('air_temp_1')
-            console.log 'updating'
-            console.log obs.toJSON()
-            console.log dataProvider.dataProvider
-            dataProvider.dataProvider.push obs.toJSON()
-          else
-            console.log 'attribute not found'
-    do @chart.validateData
-
 
   chartSettings: ->
     categoryAxesSettings:
