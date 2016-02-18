@@ -24,11 +24,11 @@ mixin smallBox(id, sub1)
         i.ion.ion-ionic
           
 mixin basicMap(mapId, height)
-  div(id=mapId, style='height: '+height+'px; width: 100%;')   
+  div.map(id=mapId, style='height: '+height+'px; width: 100%;')   
     
          
 mixin basicMapWithBasemapToggle(mapId, height, basemapChangeFunction)
-  div(id=mapId, style='height: '+height+'px; width: 100%;')
+  div.map(id=mapId, style='height: '+height+'px; width: 100%;')
   #basemaps-wrapper.leaflet-bar
     select#basemaps(name='basemaps', onchange=basemapChangeFunction+'(basemaps)')
       option(value='Imagery')
