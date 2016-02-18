@@ -1,18 +1,39 @@
 define [
+  'underscore'
   'jquery'
   'backbone'
-  'cs!views/LeafletMapView'
-  'bootstrap-datetimepicker'
-], ($, Backbone, LeafletMapView) -> Backbone.View.extend
+  'cs!views/DateFilteredMapView'
+], (_, $, Backbone, DateFilteredMapView) -> DateFilteredMapView.extend
   el: '#sheepPositionTracersDiv'
+  
+  events: 
+    'dp.show':   'updateTime' # In case we role in to another day
+    'dp.change': 'selectTime'
+  
+  initialize:->
+    DateFilteredMapView.prototype.initialize.apply this, arguments
 
-  initialize: ->
-    @leaflet = new LeafletMapView el: '#sheepTraceMap'
+  selectTime: ->
+    do @showOverlay
+    @leaflet.map.removeLayer @traces if @traces?
+    sheep = @model.createSheep()
+    sheep
+      .since(@time.data('DateTimePicker').date().toDate())
+      .complete =>
+        @traces = L.featureGroup @createSheepTraces sheep.nodes
+        @traces.addTo @leaflet.map
+        @leaflet.fitBounds @traces
+        do @hideOverlay
 
-    @listenTo @model.nodeRegistry, 'sync', @renderDropDown
+  createSheepTraces: (nodes) ->
+    nodes.map (n) =>
+      points = n.observations.map( (obs) => [obs.get('lat'), obs.get('lon')] )
+      return @createSheepTrace points, n.get 'colour'
 
-  renderDropDown: ->
-    dropdown = @$('#sheepTrackSelectSheepId')
-    sheep = @model.nodeRegistry.where(node_type: 'Sheep')
-
-    dropdown.append _.map sheep, (s) -> "<option>#{s.getAddress()}</option>"
+  createSheepTrace: (points, colour) ->
+    L.polyline points,
+      color:        colour
+      smoothFactor: 0.1
+      weight:       3
+      opacity:      1
+      lineJoin:    'round'

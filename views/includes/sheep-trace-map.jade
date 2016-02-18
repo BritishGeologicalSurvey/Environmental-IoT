@@ -6,6 +6,7 @@ include ../mixins/mixins-dashboard
   .box-header.no-border
     h3.box-title Sheep Position Tracers
     .box-tools.pull-right
+      span.badge.nodata.bg-yellow(style="display:none;") No Data
       button.btn.btn-box-tool(data-widget='collapse')
         i.fa.fa-minus
       button.btn.btn-box-tool(data-widget='remove')
@@ -13,27 +14,9 @@ include ../mixins/mixins-dashboard
   .box-body
     mixin basicMap("sheepTraceMap", 300)
     .form-group
-        label Sheep ID
-        select.form-control(id="sheepTrackSelectSheepId")
-        label Date and time Start:
+        label Select Date:
         #sheepTrackSelectDateTime.input-group.date
                 input.form-control(type='text')
                 span.input-group-addon
                   span.glyphicon.glyphicon-calendar
-        label Update Frequency (seconds)
-        select.form-control(id="sheepTrackSelectUpdateFrequency")
-          option 10
-          option 20
-          option 30
-          option 40
-        label Time periods (seconds)
-        select.form-control(id="sheepTrackSelectTimePeriod")
-          option 30
-          option 60
-          option 90
-          option 120
-          option 150
-    button(class="btn btn-default", id="SheepButton1").
-      Start
-    #sheepTrackStatusBar Last Updated:
   
