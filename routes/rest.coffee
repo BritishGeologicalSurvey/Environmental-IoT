@@ -4,28 +4,8 @@
 ###
 express = require 'express'
 
-module.exports = (dataModel, clock) ->
+module.exports = (envdata, nodeRegistry, clock) ->
   router = express.Router()
-
-  ###
-    Query Building from URL params
-    Expecting:
-    - e.g. http://<sitelocation>:<port>/api?sensor=sheep&starttime=xxxxx&endtime=xxxxx
-    - sensor=sheep or sensor=soil
-    - starttime=xxxxx (ISO Date format)
-    - endtime=xxxxx (ISO Date format)
-
-    http://localhost:3000/querynode?nodeid=A6&starttime=2015-12-01T16:21:04.657Z&endtime=2015-12-25T16:21:04.657Z
-  ###
-  router.get '/api', (req, res) ->
-    dataModel.find
-      $and: [
-        timestamp:
-          "$gte": new Date req.query.starttime
-          "$lt":  new Date req.query.endtime
-      ,
-        sensor: req.query.sensor
-      ], (err, posts) -> res.json posts
 
   ###
   Get the current system time
@@ -33,48 +13,69 @@ module.exports = (dataModel, clock) ->
   router.get '/time', (req, res) ->
     res.json systemTime: clock.getTime()
 
-  ###
-  Getting values from nodes and their sensors
-  ###
-  router.get '/querynode', (req, res)->
-    moisture_exists = req.query.packet is 1
+  recordsFor = (types, since, callback) ->
+    twentyFourHours = 24 * 60 * 60 * 1000
+    yesterday = clock.getTime() - twentyFourHours
 
-    dataModel.find
-      $and: [
-        timestamp: 
-          "$gte": new Date req.query.starttime
-          "$lt":  new Date req.query.endtime
+    timestamp = new Date if since? then since else yesterday
+
+    query = 
+      sensor: $in: types # basic query
+      timestamp:
+        $gt: timestamp
+        $lt: new Date timestamp.getTime() + twentyFourHours
+    
+    envdata.find(query, callback).sort(timestamp: -1)
+
+  ###
+  Get the latest sheep data
+  Optionally return just the latest records after a specified datetime query param
+  ###
+  router.get '/sheep', (req, res) -> 
+    recordsFor ['gps'], req.query.since, (err, data) ->  res.json data.reverse()
+
+  ###
+  Get the latest soil data
+  Optionally return just the latest records after a specified datetime query param
+  ###
+  router.get '/soil', (req, res) ->
+    recordsFor ['soil','soil1','soil2'], req.query.since, (err, data) ->  res.json data.reverse()
+    
+  ###
+  Get the latest met station data
+  Optionally return just the latest records after a specified datetime query param
+  ###
+  router.get '/metstation', (req, res) ->
+    recordsFor ['metstation'], req.query.since, (err, data) ->  res.json data.reverse()
+    
+  router.get '/nodes', (req, res) ->
+    sheep = [
+        address:   '[{\"interface-type\":\"SHEEP\",\"address\":\"0xd0\"}]'
+        node_type: 'Sheep'
+        icon:      '/img/Blue-Sheep.png'
       ,
-        address: req.query.nodeid
-        soil_moisture_1: $exists: moisture_exists
-      ], (err, posts) ->  res.json posts
-
-  router.get '/querysoil', (req, res)->
-    dataModel.find
-      $and: [
-        timestamp: 
-          "$gte": new Date req.query.starttime
-          "$lt": new Date req.query.endtime
+        address:   '[{\"interface-type\":\"SHEEP\",\"address\":\"0xd1\"}]'
+        node_type: 'Sheep'
+        icon:      '/img/Green-Sheep.png'
       ,
-        address: req.query.nodeid
-      ], (err, posts) -> res.json posts
-
-  ###
-  Get all the points up to a limit of 50
-  ###
-  router.get '/api/points', (req, res, next)->
-    dataModel.find {}, (err, posts)->
-        if not err then res.json posts
-        else throw err
-    .limit 50
-
-  ###
-  Get a single point by its id.
-  ###
-  router.get '/api/points/:id', (req, res, next)->
-    dataModel.findById req.params.id, (err, results)->
-      if err then return next err
-      if not results then res.send "NODATA"
-      else res.json results
-
-  return router
+        address:   '[{\"interface-type\":\"SHEEP\",\"address\":\"0x1f6\"}]'
+        node_type: 'Sheep'
+        icon:      '/img/Orange-Sheep.png'
+      ,
+        address:   '[{\"interface-type\":\"SHEEP\",\"address\":\"0x0\"}]'
+        node_type: 'Sheep'
+        icon:      '/img/Purple-Sheep.png'
+      ,
+        address:   '[{\"interface-type\":\"SHEEP\",\"address\":\"0xff\"}]'
+        node_type: 'Sheep'
+        icon:      '/img/Red-Sheep.png'
+      ,
+        address:   '[{\"interface-type\":\"SHEEP\",\"address\":\"0xd3\"}]'
+        node_type: 'Sheep'
+        icon:      '/img/Turquoise-Sheep.png'
+      ,
+        address:   '[{\"interface-type\":\"SHEEP\",\"address\":211}]'
+        node_type: 'Sheep'
+        icon:      '/img/Yellow-Sheep.png'
+    ]
+    nodeRegistry.find (err,data) -> res.json sheep.concat data

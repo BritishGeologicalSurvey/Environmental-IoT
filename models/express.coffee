@@ -7,7 +7,7 @@ bodyParser   = require 'body-parser'
 index        = require '../routes/index'
 rest         = require '../routes/rest'
 
-module.exports = (dataModel, clock)->
+module.exports = (envData, nodeRegistry, clock)->
   app = express()
 
   # view engine setup
@@ -23,7 +23,7 @@ module.exports = (dataModel, clock)->
 
   app.use express.static path.join __dirname, '../public'
 
-  app.use '/', rest(dataModel, clock)
+  app.use '/', rest(envData, nodeRegistry, clock)
   app.use '/', index()
 
   # catch 404 and forward to error handler

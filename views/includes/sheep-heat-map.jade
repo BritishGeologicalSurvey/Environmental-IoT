@@ -1,9 +1,12 @@
 include ../mixins/mixins-dashboard
 
 #sheepHeatMapDiv.box.box-primary
+  #sheepHeatMapOverlay.overlay(style="display:none;")
+    i.fa.fa-cog.fa-spin
   .box-header.no-border
     h3.box-title Sheep Position Heat Map
     .box-tools.pull-right
+      span.badge.bg-red Live  
       button.btn.btn-box-tool(data-widget='collapse')
         i.fa.fa-minus
       button.btn.btn-box-tool(data-widget='remove')
