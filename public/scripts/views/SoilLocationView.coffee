@@ -35,7 +35,7 @@ define [
         <a node='#{node.id}' variable='moisture'>View Measurements</a></p>
       """)
       .addTo @markers
-      do @fitBounds
+      @fitBounds @markers
   
   ###
   Event handler for <a> clicks in leaflet popups. Open a detailed sensor view
