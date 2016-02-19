@@ -45,37 +45,44 @@ module.exports = (envdata, nodeRegistry, clock) ->
   Get the latest met station data
   Optionally return just the latest records after a specified datetime query param
   ###
-  router.get '/metstation', (req, res) ->
+  router.get '/weather', (req, res) ->
     recordsFor ['metstation'], req.query.since, (err, data) ->  res.json data.reverse()
-    
+
   router.get '/nodes', (req, res) ->
     sheep = [
         address:   '[{\"interface-type\":\"SHEEP\",\"address\":\"0xd0\"}]'
         node_type: 'Sheep'
+        colour:    '#00ccff'
         icon:      '/img/Blue-Sheep.png'
       ,
         address:   '[{\"interface-type\":\"SHEEP\",\"address\":\"0xd1\"}]'
         node_type: 'Sheep'
+        colour:    '#87de87'
         icon:      '/img/Green-Sheep.png'
       ,
         address:   '[{\"interface-type\":\"SHEEP\",\"address\":\"0x1f6\"}]'
         node_type: 'Sheep'
+        colour:    '#ff9955'
         icon:      '/img/Orange-Sheep.png'
       ,
         address:   '[{\"interface-type\":\"SHEEP\",\"address\":\"0x0\"}]'
         node_type: 'Sheep'
+        colour:    '#cc00ff'
         icon:      '/img/Purple-Sheep.png'
       ,
         address:   '[{\"interface-type\":\"SHEEP\",\"address\":\"0xff\"}]'
         node_type: 'Sheep'
+        colour:    '#d35f5f'
         icon:      '/img/Red-Sheep.png'
       ,
         address:   '[{\"interface-type\":\"SHEEP\",\"address\":\"0xd3\"}]'
         node_type: 'Sheep'
+        colour:    '#00ffcc'
         icon:      '/img/Turquoise-Sheep.png'
       ,
         address:   '[{\"interface-type\":\"SHEEP\",\"address\":211}]'
         node_type: 'Sheep'
+        colour:    '#ffdd55'
         icon:      '/img/Yellow-Sheep.png'
     ]
     nodeRegistry.find (err,data) -> res.json sheep.concat data

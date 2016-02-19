@@ -11,10 +11,17 @@ define [
 
     osm.addTo @map
     
+    @nodata = $('<span class="nodata badge bg-yellow">No Data</span>').appendTo(@$el)
     @markers = L.featureGroup([]).addTo @map
 
   ###
-  Zoom the map to the bounds of the markers which have been added to the 
-  @markers collection
+  Zoom in to the bounds of a given layer. If the bounds is not valid 
+  (e.g. generated from a layer with no points) then show the nodata badge
   ###
-  fitBounds: -> @map.fitBounds @markers.getBounds()
+  fitBounds: (layer) ->
+    bounds = layer.getBounds()
+    if bounds.isValid()
+      @map.fitBounds bounds
+      do @nodata.hide
+    else
+      do @nodata.show

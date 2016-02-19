@@ -23,6 +23,7 @@ define [
   If the chart does not yet contain measurements for a specific sensor then add a dataset to display that sensor.
   ###
   addObservation: (obs) ->
+    @startDate = new Date(obs.get('timestamp')) if not @startDate?
     _.chain(@sensors).filter((f) -> obs.has(f.field) ).each (sensor) =>
       @endDate = new Date(obs.get('timestamp'))
       datasetTitle = @nodeId + " " + sensor.title

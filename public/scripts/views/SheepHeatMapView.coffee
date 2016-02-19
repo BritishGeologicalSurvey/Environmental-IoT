@@ -1,10 +1,9 @@
 define [
   'jquery'
   'backbone'
-  'cs!views/LeafletMapView'
+  'cs!views/DateFilteredMapView'
   'leaflet-heat'
-  'bootstrap-datetimepicker'
-], ($, Backbone, LeafletMapView) -> Backbone.View.extend
+], ($, Backbone, DateFilteredMapView) -> DateFilteredMapView.extend
   el: '#sheepHeatMapDiv'
 
   events: 
@@ -12,11 +11,8 @@ define [
     'dp.change': 'selectTime'
   
   initialize:->
-    @leaflet = new LeafletMapView el: '#sheepHeatMap'
+    DateFilteredMapView.prototype.initialize.apply this, arguments
     @liveHeatLayer = @createHeatMap(@model.sheep).addTo @leaflet.map
-    @time = @$('.date').datetimepicker format:'YYYY-MM-DD'
-
-    @listenTo @model.clock, 'sync', @updateTime
 
   ###
   Determine if the selected day is the today (in server time terms), if it is
@@ -28,10 +24,11 @@ define [
     @leaflet.map.removeLayer @historicHeatLayer if @historicHeatLayer?
 
     if useLive
-      @$('.badge').show()
+      @$('.live').show()
       @leaflet.map.addLayer @liveHeatLayer
+      @leaflet.fitBounds @liveHeatLayer
     else
-      @$('.badge').hide()
+      @$('.live').hide()
       @leaflet.map.removeLayer @liveHeatLayer
       @loadHistoricHeatLayer evt.date.toDate()
 
@@ -40,21 +37,10 @@ define [
   Show the loading overlay whilst loading commences
   ###
   loadHistoricHeatLayer: (date) ->
-    do @showOverlay
     historicSheep = @model.createSheep()
     @historicHeatLayer = @createHeatMap(historicSheep)
     @leaflet.map.addLayer @historicHeatLayer
-    historicSheep.since(date).complete => @hideOverlay()
-
-  ###
-  Fade the loading overlay in
-  ###
-  showOverlay: -> @$('#sheepHeatMapOverlay').fadeIn 300
-
-  ###
-  Fade the loading overlay out
-  ###
-  hideOverlay: -> @$('#sheepHeatMapOverlay').fadeOut 300
+    historicSheep.since(date)
 
   ###
   Create a leaflet heat map layer which is bound to a sheep collection. When
@@ -62,14 +48,17 @@ define [
   ###
   createHeatMap: (sheep) ->
     heatmap = L.heatLayer([])
+    heatmap.getBounds =-> new L.LatLngBounds heatmap._latlngs
+    
     sheep.on 'add', (obs) -> 
       lat = obs.get 'lat'
       lon = obs.get 'lon'
       heatmap.addLatLng [lat, lon] if lat? and lon?
-    return heatmap
 
-  ###
-  Set the max date for the DateTimePicker. 
-  ###
-  updateTime: ->
-    @time.data('DateTimePicker').maxDate @model.clock.getTime()
+    # Show the loading overlay and, remove once we have got some data
+    do @showOverlay
+    sheep.once 'sync', => 
+      do @hideOverlay
+      @leaflet.fitBounds heatmap
+
+    return heatmap 

@@ -40,3 +40,6 @@ node_modules
 # DB Info
 dbsecure.js
 map-locations.js
+
+# Ignore built css file
+public/css
