@@ -30,7 +30,4 @@
   npm: path=/opt/iot
 
 - name: compile the style sheets
-  command: /usr/bin/grunt less
-  args:
-    chdir: /opt/iot
-    creates: /opt/iot/public/css/style.css
+  command: /usr/bin/grunt less chdir=/opt/iot

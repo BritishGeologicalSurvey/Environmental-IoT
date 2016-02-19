@@ -10,3 +10,4 @@
     - 'routes'
     - 'package.json'
     - 'Main.coffee'
+    - 'Gruntfile.coffee'

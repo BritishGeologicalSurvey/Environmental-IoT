@@ -48,4 +48,7 @@ Understanding and Managing the Natural Environment through Internet of Things Te
 
 ## Deploying to live server using ansible
 
-   ansible-playbook ansible/live.yaml --ask-sudo-pass
+    # Edit your ansible hosts so that the iot server is present
+    echo "nsb-iot.cloudapp.net" >> /etc/ansible/hosts
+    
+    ansible-playbook ansible/live.yaml --ask-sudo-pass
