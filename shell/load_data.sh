@@ -1,4 +1,9 @@
 #!/bin/sh
 # Populate the local mongo database with the data
+cd /vagrant/data
+mkdir envdata
+tar -xvf /vagrant/data/envdata.tar.gz -C envdata
+mongorestore envdata
 
-mongoimport -d mydb -c everything --type csv --file /vagrant/data/All\ data\ 23-11-15\ to\ 21-12-15.csv --headerline
+# Copy over the map-locations.js
+cp map-locations.js /vagrant/code/public/js/components/.

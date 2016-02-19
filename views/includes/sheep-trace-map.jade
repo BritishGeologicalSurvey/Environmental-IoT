@@ -1,0 +1,22 @@
+include ../mixins/mixins-dashboard
+
+#sheepPositionTracersDiv.box.box-primary
+  #sheepPositionTracersDivOverlay.overlay(style="display:none;")
+    i.fa.fa-cog.fa-spin
+  .box-header.no-border
+    h3.box-title Sheep Position Tracers
+    .box-tools.pull-right
+      span.badge.nodata.bg-yellow(style="display:none;") No Data
+      button.btn.btn-box-tool(data-widget='collapse')
+        i.fa.fa-minus
+      button.btn.btn-box-tool(data-widget='remove')
+        i.fa.fa-times    
+  .box-body
+    mixin basicMap("sheepTraceMap", 300)
+    .form-group
+        label Select Date:
+        #sheepTrackSelectDateTime.input-group.date
+                input.form-control(type='text')
+                span.input-group-addon
+                  span.glyphicon.glyphicon-calendar
+  

@@ -1,0 +1,8 @@
+extends ../components/component-box.jade
+include ../mixins/mixins-dashboard
+
+block boxHeading
+  h3.box-title Sheep Time Cells Map
+  
+block boxBody
+  mixin basicMap("sheepTimeCellsMap", 300)

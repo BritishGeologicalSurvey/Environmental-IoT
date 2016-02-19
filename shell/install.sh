@@ -9,3 +9,4 @@ curl -sL https://deb.nodesource.com/setup_4.x | sudo -E bash -
 apt-get install -y nodejs mongodb
 
 npm install -g node-inspector
+npm install -g coffee-script

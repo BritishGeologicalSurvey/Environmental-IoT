@@ -1,0 +1,55 @@
+
+// Generate a simple placeholder box with a custom header title
+mixin placeholderBox(name)
+  .box.box-primary
+    .box-header.no-border
+      h3.box-title= name
+      .box-tools.pull-right
+        button.btn.btn-box-tool(data-widget='collapse')
+          i.fa.fa-minus
+        button.btn.btn-box-tool(data-widget='remove')
+          i.fa.fa-times
+    .box-body
+      div(id='bingle' style='width:100%; height:100px; padding-left:20px; padding-right:20px;')
+
+mixin smallBox(id, sub1)
+  .col-lg-6.col-xs-6(id=id)
+    .small-box.bg-primary
+      .box-header
+        .pull-right.box-tools
+      .inner
+        h3= "- / -"
+        p= sub1
+      .icon
+        i.ion.ion-ionic
+          
+mixin basicMap(mapId, height)
+  div.map(id=mapId, style='height: '+height+'px; width: 100%;')   
+    
+         
+mixin basicMapWithBasemapToggle(mapId, height, basemapChangeFunction)
+  div.map(id=mapId, style='height: '+height+'px; width: 100%;')
+  #basemaps-wrapper.leaflet-bar
+    select#basemaps(name='basemaps', onchange=basemapChangeFunction+'(basemaps)')
+      option(value='Imagery')
+        | Imagery
+        options
+          option(value='Streets') Streets
+          option(value='NationalGeographic')
+            | National Geographic
+            options
+              option(value='Oceans')
+                | Oceans
+                options
+                  option(value='Gray')
+                    | Gray
+                    options
+                      option(value='DarkGray')
+                        | Dark Gray
+                        options
+                          option(value='Topographic')
+                            | Topographic
+                            options
+                              option(value='ShadedRelief')
+                                | Shaded Relief
+                                options

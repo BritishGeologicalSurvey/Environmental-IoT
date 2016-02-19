@@ -1,0 +1,9 @@
+extends ../components/component-box.jade
+include ../mixins/mixins-dashboard
+
+block boxHeading
+  h3.box-title Sensor Map
+  
+block boxBody
+  mixin basicMapWithBasemapToggle("sensorLocationsMap", 350, "SiteLocationMap.changeBasemap")
+  

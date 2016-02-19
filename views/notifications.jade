@@ -1,0 +1,25 @@
+extend layout
+
+block navigationLinks
+
+block sectionContentHeader
+  section.content-header
+    h1
+      | Notifications Testbed
+    ol.breadcrumb
+      li
+        a(href='../../notifications')
+          i.fa.fa-dashboard
+          | Home
+      li.active Notifications Testbed
+  section.content
+  
+block sectionContentTop
+  //- button.btn.btn-block.btn-primary.btn-lg(onclick='notificationsHandler.showNotification("icon fa fa-balance-scale", "notifyTitle", "notifyMessage", "/ops", "danger")') Primary
+  
+  button.btn.btn-block.btn-primary.btn-lg(onclick='notificationsHandler.generateDemoMessage()') Random Alert
+    
+block sectionContentLeftCol
+
+
+block sectionContentRightCol

@@ -1,0 +1,36 @@
+extend layout
+include ./mixins/mixins-dashboard
+
+append head
+
+append foot
+
+block navigationLinks
+  - var navSelected = 'Soil Sensors'; 
+
+block sectionContentHeader
+  h1
+    | Soil Sensors
+    small
+      | Here you can monitor the hardware and software operations as part of this IoT project.
+  ol.breadcrumb
+    li
+      a(href='#')
+        i.fa.fa-dashboard
+        |  Soil Sensors
+    li.active Summary
+    
+block sectionContentTop
+  include includes/soil-summary.jade
+      
+block sectionContentLeftCol
+  include includes/soil-location-map.jade
+  include includes/soil-temp-chart
+  +placeholderBox("Environment activity status")
+  +placeholderBox("Grid showing individual sensor status")
+  +placeholderBox("Selected sensor schematic")
+
+block sectionContentRightCol
+  include includes/soil-moisture-chart
+  +placeholderBox("Sensor network schematic")
+  +placeholderBox("Site webcam")

@@ -1,0 +1,21 @@
+include ../mixins/mixins-dashboard
+
+#sheepHeatMapDiv.box.box-primary
+  #sheepHeatMapOverlay.overlay(style="display:none;")
+    i.fa.fa-cog.fa-spin
+  .box-header.no-border
+    h3.box-title Sheep Position Heat Map
+    .box-tools.pull-right
+      span.live.badge.bg-red Live  
+      button.btn.btn-box-tool(data-widget='collapse')
+        i.fa.fa-minus
+      button.btn.btn-box-tool(data-widget='remove')
+        i.fa.fa-times
+  .box-body
+    mixin basicMap("sheepHeatMap", 300)
+    .form-group
+      label Select Date:
+      #sheepHeatSelectDate.input-group.date
+              input.form-control(type='text')
+              span.input-group-addon
+                span.glyphicon.glyphicon-calendar
