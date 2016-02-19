@@ -25,14 +25,12 @@ block sectionContentTop
       
 block sectionContentLeftCol
   include includes/soil-location-map.jade
+  include includes/soil-temp-chart
   +placeholderBox("Environment activity status")
   +placeholderBox("Grid showing individual sensor status")
   +placeholderBox("Selected sensor schematic")
 
 block sectionContentRightCol
   include includes/soil-moisture-chart
-  include includes/soil-temp-chart
-  +placeholderBox("Site weather station")
   +placeholderBox("Sensor network schematic")
   +placeholderBox("Site webcam")
-  +placeholderBox("Chart: Air humidity")
