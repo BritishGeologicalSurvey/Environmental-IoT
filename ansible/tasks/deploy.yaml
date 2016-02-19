@@ -1,0 +1,13 @@
+---
+- file: path=/opt/iot state=directory mode=0777
+
+- synchronize: src=../{{ item }} dest=/opt/iot/
+  sudo: false
+  with_items:
+    - 'models'
+    - 'public'
+    - 'views'
+    - 'routes'
+    - 'package.json'
+    - 'Main.coffee'
+    - 'Gruntfile.coffee'

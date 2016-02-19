@@ -1,0 +1,33 @@
+---
+- name: install add-apt-repository and https binaries for Ansible to work
+  apt: name={{ item }} state=present update_cache=yes
+  with_items:
+    - python-software-properties
+    - apt-transport-https
+
+- name: Add NodeSource deb repository
+  apt_repository:
+    repo: 'deb https://deb.nodesource.com/node_4.x {{ ansible_distribution_release }} main'
+    state: present
+
+- name: install required packages
+  apt: name={{ item }} state=present force=yes
+  with_items:
+    - build-essential
+    - libkrb5-dev
+    - nodejs
+    - mongodb
+
+- name: install global node packages
+  npm: name={{ item }} global=yes
+  with_items:
+    - grunt-cli
+    - node-inspector
+    - coffee-script
+    - pm2
+
+- name: Install packages based on package.json.
+  npm: path=/opt/iot
+
+- name: compile the style sheets
+  command: /usr/bin/grunt less chdir=/opt/iot

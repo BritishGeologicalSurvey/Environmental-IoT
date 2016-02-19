@@ -1,0 +1,9 @@
+---
+- name: install and run the IoT dashboard project
+  sudo: true
+  hosts: nsb-iot.cloudapp.net
+
+  tasks:
+    - include: tasks/deploy.yaml
+    - include: tasks/install.yaml
+    - include: tasks/restore.yaml
