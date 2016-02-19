@@ -19,7 +19,7 @@ define [
 
     node.observations.on 'add', (obs) =>
       marker.setLatLng obs.pick 'lat', 'lon'
-      do @fitBounds
+      @fitBounds @markers
 
   ###
   Create a sheep marker for the given node. This will use the icon as defined 
