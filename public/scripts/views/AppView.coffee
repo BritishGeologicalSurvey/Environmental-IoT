@@ -12,6 +12,7 @@ define [
   'cs!views/WeatherPressureView'
   'cs!views/SheepPositionTrackerView'
   'cs!views/WeatherWindSpeedView'
+  'adminlte'
 ], ($, Backbone, SheepPositionMap, SensorPositionView, NodeStatusView, SheepStatusView, SheepHeatMapView, SoilLocationView, WeatherRainfallView, WeatherTemperatureView, WeatherPressureView, SheepPositionTrackerView, WeatherWindSpeedView)-> Backbone.View.extend
 
   initialize: ->
@@ -62,3 +63,14 @@ define [
     if $(WeatherWindSpeedView.prototype.el).length
       @listenTo @model.weather.nodes, 'add', (evt) ->
         @WeatherWindSpeedView = new WeatherWindSpeedView model: evt
+
+    do @sortable
+
+  sortable: ->
+    $(".connectedSortable").sortable
+      placeholder: "sort-highlight"
+      connectWith: ".connectedSortable"
+      handle: ".box-header, .nav-tabs"
+      forcePlaceholderSize: true
+      zIndex: 999999
+    $(".connectedSortable .box-header, .connectedSortable .nav-tabs-custom").css "cursor", "move"
