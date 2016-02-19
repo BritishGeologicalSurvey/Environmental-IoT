@@ -1,0 +1,32 @@
+extend layout
+include ./mixins/mixins-dashboard
+
+append head
+
+append foot
+
+block navigationLinks
+	- var navSelected = 'weather';
+
+block sectionContentHeader
+	h1
+		| Weather
+		small
+			| Here is the latest weather from the automatic weather station
+	ol.breadcrumb
+		li
+			a(href='#')
+				i.fa.fa-dashboard
+				|	Weather
+		li.active Summary
+
+block sectionContentTop
+	include includes/soil-summary.jade
+
+block sectionContentLeftCol
+	include includes/weather-rain.jade
+	include includes/weather-temperature.jade
+
+block sectionContentRightCol
+	include includes/weather-pressure.jade
+	include includes/weather-wind-speed.jade

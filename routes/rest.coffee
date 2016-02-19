@@ -45,9 +45,9 @@ module.exports = (envdata, nodeRegistry, clock) ->
   Get the latest met station data
   Optionally return just the latest records after a specified datetime query param
   ###
-  router.get '/metstation', (req, res) ->
+  router.get '/weather', (req, res) ->
     recordsFor ['metstation'], req.query.since, (err, data) ->  res.json data.reverse()
-    
+
   router.get '/nodes', (req, res) ->
     sheep = [
         address:   '[{\"interface-type\":\"SHEEP\",\"address\":\"0xd0\"}]'

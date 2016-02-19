@@ -1,7 +1,7 @@
 define [
   'backbone'
-  'cs!views/SoilChartView'
-], (Backbone, SoilChartView)-> SoilChartView.extend
+  'cs!views/ChartView'
+], (Backbone, ChartView)-> ChartView.extend
   
   el: '#soil-temperature-chart'
 

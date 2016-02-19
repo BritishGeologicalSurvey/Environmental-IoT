@@ -7,7 +7,11 @@ define [
   'cs!views/SheepStatusView'
   'cs!views/SheepHeatMapView'
   'cs!views/SoilLocationView'
-], ($, Backbone, SheepPositionMap, SensorPositionView, NodeStatusView, SheepStatusView, SheepHeatMapView, SoilLocationView)-> Backbone.View.extend
+  'cs!views/WeatherRainfallView'
+  'cs!views/WeatherTemperatureView'
+  'cs!views/WeatherPressureView'
+  'cs!views/WeatherWindSpeedView'
+], ($, Backbone, SheepPositionMap, SensorPositionView, NodeStatusView, SheepStatusView, SheepHeatMapView, SoilLocationView, WeatherRainfallView,WeatherTemperatureView, WeatherPressureView, WeatherWindSpeedView)-> Backbone.View.extend
 
   initialize: ->
     if $(SheepPositionMap.prototype.el).length
@@ -38,3 +42,19 @@ define [
 
     if $(SoilLocationView.prototype.el).length
       @soilLocationView = new SoilLocationView collection: @model.soil.nodes
+
+    if $(WeatherRainfallView.prototype.el).length
+      @listenTo @model.weather.nodes, 'add', (evt) ->
+        @WeatherRainfallView = new WeatherRainfallView model: evt
+
+    if $(WeatherTemperatureView.prototype.el).length
+      @listenTo @model.weather.nodes, 'add', (evt) ->
+        @WeatherTemperatureView = new WeatherTemperatureView model: evt
+
+    if $(WeatherPressureView.prototype.el).length
+      @listenTo @model.weather.nodes, 'add', (evt) ->
+        @WeatherPressureView = new WeatherPressureView model: evt
+
+    if $(WeatherWindSpeedView.prototype.el).length
+      @listenTo @model.weather.nodes, 'add', (evt) ->
+        @WeatherWindSpeedView = new WeatherWindSpeedView model: evt
