@@ -7,6 +7,8 @@ VAGRANTFILE_API_VERSION = "2"
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.box = "nercceh/ubuntu14.04"
 
+  config.vm.synced_folder ".", "/opt/iot", mount_options: ['dmode=777', 'fmode=777']
+
   config.vm.network "forwarded_port", guest: 3000, host: 3000
   config.vm.network "forwarded_port", guest: 8080, host: 8080
   config.vm.network "forwarded_port", guest: 5858, host: 5858
