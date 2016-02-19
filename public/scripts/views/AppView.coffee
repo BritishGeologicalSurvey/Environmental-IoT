@@ -6,13 +6,13 @@ define [
   'cs!views/NodeStatusView'
   'cs!views/SheepStatusView'
   'cs!views/SheepHeatMapView'
-  'cs!views/SheepPositionTrackerView'
   'cs!views/SoilLocationView'
   'cs!views/WeatherRainfallView'
   'cs!views/WeatherTemperatureView'
   'cs!views/WeatherPressureView'
+  'cs!views/SheepPositionTrackerView'
   'cs!views/WeatherWindSpeedView'
-], ($, Backbone, SheepPositionMap, SensorPositionView, NodeStatusView, SheepStatusView, SheepHeatMapView, SoilLocationView, WeatherRainfallView,WeatherTemperatureView, WeatherPressureView, SheepPositionTrackerView, WeatherWindSpeedView)-> Backbone.View.extend
+], ($, Backbone, SheepPositionMap, SensorPositionView, NodeStatusView, SheepStatusView, SheepHeatMapView, SoilLocationView, WeatherRainfallView, WeatherTemperatureView, WeatherPressureView, SheepPositionTrackerView, WeatherWindSpeedView)-> Backbone.View.extend
 
   initialize: ->
     if $(SheepPositionMap.prototype.el).length
