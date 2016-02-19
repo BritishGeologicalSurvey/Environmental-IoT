@@ -19,21 +19,18 @@ block sectionContentHeader
         i.fa.fa-dashboard
         |  Sheep Sensors
     li.active Summary
-
-block sectionContentTop
-  include includes/sheep-summary.jade
       
 block sectionContentLeftCol
-  +placeholderBox("Flock status traffic lights")
   include includes/sheep-grid-status.jade
+  include includes/sheep-currentpos-map.jade
+  +placeholderBox("Flock status traffic lights")
   +placeholderBox("Sheep behavious pie chart")
   +placeholderBox("Graph of sheep speed")
 
 block sectionContentRightCol
-  +placeholderBox("Flock health status")
-  +placeholderBox("Flock distance today/week")
   include includes/sheep-heat-map.jade
   include includes/sheep-trace-map.jade
-  include includes/sheep-timecells-map.jade
+  +placeholderBox("Flock health status")
+  +placeholderBox("Flock distance today/week")
   +placeholderBox("Sheep stats for individual sheep")
-  include includes/sheep-currentpos-map.jade
+  +placeholderBox("Sheep Time Cells Map")
