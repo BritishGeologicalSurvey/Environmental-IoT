@@ -6,5 +6,5 @@
 - name: Restore the mongodb
   shell: >
     tar -xvf /opt/envdata.tar.gz -C /tmp;
-    mongorestore /tmp/envdata
+    mongorestore --drop /tmp/envdata
   when: sync_backup.changed
