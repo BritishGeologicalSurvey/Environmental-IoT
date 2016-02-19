@@ -15,22 +15,18 @@ Understanding and Managing the Natural Environment through Internet of Things Te
     git clone https://github.com/BritishGeologicalSurvey/Environmental-IoT
 
     # Copy sensitive files not in repo
-    cp dbsecure.js Environmental-IoT/dbsecure.js
-    cp map-locations.js Environmental-IoT/public/js/components/map-locations.js
+    cp envdata.tar.gz Environmental-IoT/data/.
 
     # Start Vagrant Machine
     cd Environmental-IoT
     vagrant up
-    vagrant ssh
-
-    # Now on vagrant vm
-    cd /vagrant
-    npm install
 
     # Grab a Cuppa while dependancies are downloaded/compiled/installed!
 
-    # Start node
-    npm start
+    # Start the application in development mode
+    vagrant ssh
+    cd /opt/iot
+    grunt develop
 
     # Test on web browser on host machine
     http://localhost:3000
@@ -49,3 +45,7 @@ Understanding and Managing the Natural Environment through Internet of Things Te
 
     On Host Visit:
     http://localhost:3000/
+
+## Deploying to live server using ansible
+
+   ansible-playbook ansible/live.yaml --ask-sudo-pass
