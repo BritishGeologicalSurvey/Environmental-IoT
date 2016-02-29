@@ -6,6 +6,7 @@
     "coffee-script": "1.9.3",
     "bootstrap": "3.3.6",
     "animate.css": "3.5.1",
+    "esri-leaflet": "1.0.3",
     "requirejs": "2.1.22",
     "backbone": "1.2.1",
     "underscore": "1.8.3",

@@ -15,6 +15,7 @@ require.config({
     'bootstrap-datetimepicker': '../vendor/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min',
     'cs':                       '../vendor/require-cs/cs',
     'coffee-script':            '../vendor/coffee-script/extras/coffee-script',
+    'esri-leaflet':             '../vendor/esri-leaflet/dist/esri-leaflet-src',
     'leaflet':                  '../vendor/leaflet/dist/leaflet',
     'leaflet-heat':             '../vendor/Leaflet.heat/dist/leaflet-heat',
     'tpl':                      '../vendor/requirejs-tpl/tpl',

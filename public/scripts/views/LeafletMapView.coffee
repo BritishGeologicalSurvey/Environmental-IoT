@@ -2,15 +2,14 @@ define [
   'jquery'
   'backbone'
   'leaflet'
+  'esri-leaflet'
 ], ($, Backbone, L)-> Backbone.View.extend 
   initialize:->
     @map = L.map(@el).setView [53.4, -1.8], 6
 
-    osm = L.tileLayer '//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-      attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+    esri = L.esri.basemapLayer 'Imagery'
+    esri.addTo @map
 
-    osm.addTo @map
-    
     @nodata = $('<span class="nodata badge bg-yellow">No Data</span>').appendTo(@$el)
     @markers = L.featureGroup([]).addTo @map
 
