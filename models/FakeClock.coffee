@@ -2,6 +2,13 @@ module.exports = class
   constructor: ()->
     @total = 0
     @ranges = []
+    @drift = 0
+
+  ###
+  Adds a drift value to the given realtime. This helps us maneuver the output 
+  FakeTime
+  ###
+  setDrift: (@drift) ->
 
   ###
   Adds a period of time which this clock will loop over
@@ -17,7 +24,7 @@ module.exports = class
   Which is derived from the current real time
   ###
   getTime: -> 
-    offset = @getRealTime() % @total
+    offset = (@getRealTime() + @drift) % @total
     for range in @ranges
       withinRange = offset < range.length
       return new Date(range.start + offset) if withinRange
