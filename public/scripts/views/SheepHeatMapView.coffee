@@ -47,7 +47,7 @@ define [
   observations are added to it, add these to the HeatLayer.
   ###
   createHeatMap: (sheep) ->
-    heatmap = L.heatLayer([])
+    heatmap = L.heatLayer([], max: 3)
     heatmap.getBounds =-> new L.LatLngBounds heatmap._latlngs
     
     sheep.on 'add', (obs) -> 
