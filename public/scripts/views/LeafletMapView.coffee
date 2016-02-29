@@ -7,7 +7,7 @@ define [
   initialize:->
     @map = L.map(@el).setView [53.4, -1.8], 6
 
-    esri = L.esri.basemapLayer 'Imagery'
+    esri = L.esri.basemapLayer 'Imagery', maxZoom: 18
     esri.addTo @map
 
     @nodata = $('<span class="nodata badge bg-yellow">No Data</span>').appendTo(@$el)
