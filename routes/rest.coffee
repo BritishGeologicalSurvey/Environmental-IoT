@@ -15,9 +15,10 @@ module.exports = (envdata, nodeRegistry, clock) ->
 
   recordsFor = (types, since, callback) ->
     twentyFourHours = 24 * 60 * 60 * 1000
-    yesterday = clock.getTime() - twentyFourHours
+    today = new Date clock.getTime()
+    today.setHours 0,0,0,0
 
-    timestamp = new Date if since? then since else yesterday
+    timestamp = if since? then new Date since else today
 
     query = 
       sensor: $in: types # basic query
