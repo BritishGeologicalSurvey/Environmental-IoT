@@ -10,6 +10,13 @@ describe "FakeClock", ->
     spyOn(clock, 'getRealTime').and.returnValue 0
     expect(clock.getTime()).toEqual new Date(2015,3,12)
 
+  it "can apply a drift value to the faketime period", ->
+    clock.add new Date(2015,3,12), new Date(2015,3,13)
+    clock.setDrift 60 * 1000
+    spyOn(clock, 'getRealTime').and.returnValue 0
+    expect(clock.getTime()).toEqual new Date(2015,3,12,0,1)
+
+
   it "returns first time after length of period", ->
     start = new Date 2013, 3, 12
     end   = new Date 2014, 3, 13
