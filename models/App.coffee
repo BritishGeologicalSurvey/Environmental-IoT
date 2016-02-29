@@ -26,6 +26,7 @@ module.exports = class
   # dates which the sensors were deployed.
   createClock: ->
     clock = new FakeClock
+    clock.setDrift 10 * 60 * 60 * 1000
     clock.add new Date("2015-07-21T11:40:00Z"), new Date("2015-07-21T11:41:00Z")
     clock.add new Date("2015-07-21T12:09:00Z"), new Date("2015-07-21T12:10:00Z")
     clock.add new Date("2015-07-21T12:28:00Z"), new Date("2015-07-21T12:30:00Z")
