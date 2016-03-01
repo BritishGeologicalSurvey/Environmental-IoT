@@ -7,9 +7,10 @@ Understanding and Managing the Natural Environment through Internet of Things Te
     # This works best if the host machine is linux or mac based
     # As there are issues with using node.js on a windows file system (symbolic links/file path length)
 
-    # Install Virtualbox and Vagrant from:
+    # Install Virtualbox, Vagrant and Ansible on your local (host) machine from:
     https://www.virtualbox.org/
     https://www.vagrantup.com/
+    http://docs.ansible.com/ansible/intro_installation.html
 
     # Clone Repo
     git clone https://github.com/BritishGeologicalSurvey/Environmental-IoT
@@ -50,5 +51,5 @@ Understanding and Managing the Natural Environment through Internet of Things Te
 
     # Edit your ansible hosts so that the iot server is present
     echo "nsb-iot.cloudapp.net" >> /etc/ansible/hosts
-    
+
     ansible-playbook ansible/live.yaml --ask-sudo-pass
