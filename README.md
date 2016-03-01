@@ -4,13 +4,13 @@ Understanding and Managing the Natural Environment through Internet of Things Te
 
 ## Setting up the project
 
-    # This works best if the host machine is linux or mac based
-    # As there are issues with using node.js on a windows file system (symbolic links/file path length)
+    # This currently only works if the host machine is linux or mac based
+    # As there are issues with using node.js on a windows file system (symbolic links/file path length) and ansible only runs on linux/mac
 
     # Install Virtualbox, Vagrant and Ansible on your local (host) machine from:
     https://www.virtualbox.org/
     https://www.vagrantup.com/
-    http://docs.ansible.com/ansible/intro_installation.html
+    http://docs.ansible.com/ansible/intro_installation.html or https://valdhaus.co/writings/ansible-mac-osx/
 
     # Clone Repo
     git clone https://github.com/BritishGeologicalSurvey/Environmental-IoT
