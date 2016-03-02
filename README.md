@@ -10,7 +10,10 @@ Understanding and Managing the Natural Environment through Internet of Things Te
     # Install Virtualbox, Vagrant and Ansible on your local (host) machine from:
     https://www.virtualbox.org/
     https://www.vagrantup.com/
-    http://docs.ansible.com/ansible/intro_installation.html or https://valdhaus.co/writings/ansible-mac-osx/
+
+    # Fix Vagrant Bug
+    https://github.com/mitchellh/vagrant/commit/9dbdb9397a92d4fc489e9afcb022621df7f60d11
+    sudo nano embedded/gems/gems/vagrant-1.8.1/plugins/provisioners/ansible/provisioner/guest.rb
 
     # Clone Repo
     git clone https://github.com/BritishGeologicalSurvey/Environmental-IoT
