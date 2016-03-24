@@ -11,10 +11,14 @@ Understanding and Managing the Natural Environment through Internet of Things Te
     https://www.virtualbox.org/
     https://www.vagrantup.com/
 
-    # Fix Vagrant Bug
+    # Fix Vagrant Bug 1
     https://github.com/mitchellh/vagrant/commit/9dbdb9397a92d4fc489e9afcb022621df7f60d11
     sudo nano embedded/gems/gems/vagrant-1.8.1/plugins/provisioners/ansible/provisioner/guest.rb
-	On Windows 7: C:\HashiCorp\Vagrant\embedded\gems\gems\vagrant-1.8.1\plugins\provisioners\ansible\provisioner\guest.rb
+    On Windows 7: C:\HashiCorp\Vagrant\embedded\gems\gems\vagrant-1.8.1\plugins\provisioners\ansible\provisioner\guest.rb
+    
+    # Fix Vagrant Bug 2 (windows only)
+    https://github.com/mitchellh/vagrant/commit/07f3d0b00dabc37281a01c6776eed22daeea7066
+    C:\HashiCorp\Vagrant\embedded\gems\gems\vagrant-1.8.1\plugins\provisioners\ansible\config\guest.rb
 
     # Clone Repo
     git clone https://github.com/BritishGeologicalSurvey/Environmental-IoT
