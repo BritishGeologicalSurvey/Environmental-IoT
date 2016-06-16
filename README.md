@@ -13,7 +13,7 @@ Understanding and Managing the Natural Environment through Internet of Things Te
 
     # Fix Vagrant Bug 1
     https://github.com/mitchellh/vagrant/commit/9dbdb9397a92d4fc489e9afcb022621df7f60d11
-    sudo nano embedded/gems/gems/vagrant-1.8.1/plugins/provisioners/ansible/provisioner/guest.rb
+    sudo nano /opt/vagrant/embedded/gems/gems/vagrant-1.8.1/plugins/provisioners/ansible/provisioner/guest.rb
     On Windows 7: C:\HashiCorp\Vagrant\embedded\gems\gems\vagrant-1.8.1\plugins\provisioners\ansible\provisioner\guest.rb
     
     # Fix Vagrant Bug 2 (windows only)
