@@ -42,18 +42,19 @@ Understanding and Managing the Natural Environment through Internet of Things Te
 
 ## Using the Node inspector
 
-    On VM SSH Run:
-    node-inspector --no-preload
-
-    On New VM SSH:
-    cd /vagrant/
-    node --debug-brk bin/www
-
-    On Host Visit:
-    http://127.0.0.1:8080/?ws=127.0.0.1:8080&port=5858 to start debugging.
+    On VM SSH (Terminal 1) Run:
+    cd /opt/iot 
+    coffee --nodejs --debug Main.coffee
+    
+    On VM SSH (Terminal 2) Run:
+    cd /opt/iot
+    node-inspector --debug-port=5858 --web-port=1234 --no-preload
 
     On Host Visit:
-    http://localhost:3000/
+    http://127.0.0.1:1234/?port=5858 to start debugging console.
+
+    On Host Visit:
+    http://localhost:3000/ to view front-end application
 
 ## Deploying to live server using ansible
 
