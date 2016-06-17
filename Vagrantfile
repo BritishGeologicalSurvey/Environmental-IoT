@@ -12,6 +12,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.network "forwarded_port", guest: 3000, host: 3000
   config.vm.network "forwarded_port", guest: 8080, host: 8080
   config.vm.network "forwarded_port", guest: 5858, host: 5858
+  config.vm.network "forwarded_port", guest: 1234, host: 1234
 
   config.vm.provision "ansible_local" do |ansible|
     ansible.provisioning_path = "/opt/iot/ansible/"
