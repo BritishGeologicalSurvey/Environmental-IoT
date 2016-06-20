@@ -7,6 +7,9 @@ express = require 'express'
 module.exports = (envdata, nodeRegistry, clock) ->
   router = express.Router()
 
+  router.get '/timeranges', (req, res) ->
+    res.json systemTime: clock.ranges
+
   ###
   Get the current system time
   ###
@@ -20,19 +23,21 @@ module.exports = (envdata, nodeRegistry, clock) ->
 
     timestamp = if since? then new Date since else today
 
-    query = 
+    # console.log timestamp
+
+    query =
       sensor: $in: types # basic query
       timestamp:
         $gt: timestamp
         $lt: new Date timestamp.getTime() + twentyFourHours
-    
+
     envdata.find(query, callback).sort(timestamp: -1)
 
   ###
   Get the latest sheep data
   Optionally return just the latest records after a specified datetime query param
   ###
-  router.get '/sheep', (req, res) -> 
+  router.get '/sheep', (req, res) ->
     recordsFor ['gps'], req.query.since, (err, data) ->  res.json data.reverse()
 
   ###
@@ -41,7 +46,7 @@ module.exports = (envdata, nodeRegistry, clock) ->
   ###
   router.get '/soil', (req, res) ->
     recordsFor ['soil','soil1','soil2'], req.query.since, (err, data) ->  res.json data.reverse()
-    
+
   ###
   Get the latest met station data
   Optionally return just the latest records after a specified datetime query param

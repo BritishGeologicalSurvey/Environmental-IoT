@@ -5,7 +5,7 @@ module.exports = class
     @drift = 0
 
   ###
-  Adds a drift value to the given realtime. This helps us maneuver the output 
+  Adds a drift value to the given realtime. This helps us maneuver the output
   FakeTime
   ###
   setDrift: (@drift) ->
@@ -23,15 +23,17 @@ module.exports = class
     .add(start, end)
   Which is derived from the current real time
   ###
-  getTime: -> 
+  getTime: ->
     offset = (@getRealTime() + @drift) % @total
     for range in @ranges
       withinRange = offset < range.length
-      return new Date(range.start + offset) if withinRange
+      newCalculatedDate = new Date(range.start + offset)
+      # $("#dateNowText").text(newCalculatedDate) if withinRange
+      return newCalculatedDate if withinRange
       offset -= range.length
 
   ###
-  Return the current time in milliseconds since 1970. In a production 
+  Return the current time in milliseconds since 1970. In a production
   environment, this function should return a value with increments over time.
   ###
   getRealTime: -> new Date().getTime()
