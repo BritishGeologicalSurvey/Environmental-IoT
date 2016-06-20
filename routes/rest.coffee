@@ -7,6 +7,9 @@ express = require 'express'
 module.exports = (envdata, nodeRegistry, clock) ->
   router = express.Router()
 
+  router.post '/setClock', (req, res) ->
+    console.log req.body.newDate
+
   router.get '/timeranges', (req, res) ->
     res.json systemTime: clock.ranges
 
