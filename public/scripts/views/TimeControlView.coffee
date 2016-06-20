@@ -10,6 +10,12 @@ define [
     @listenTo @clock, 'sync', @refresh
     console.log "TimeControlView initialised"
 
+    $ ->
+      $('#timeSelectDropdown').change ->
+        selected = $('#timeSelectDropdown option').filter(':selected').text()
+        formattedDate = new Date(selected)
+        $("#dateNowText").text(formattedDate)
+
   ###
   Update the display of how many nodes are online over how many are known about
   ###
