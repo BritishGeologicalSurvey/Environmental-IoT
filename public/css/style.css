@@ -65,3 +65,6 @@
   top: 5px;
   display: none;
 }
+#headerCurrentTime {
+  margin-top: 15px;
+}

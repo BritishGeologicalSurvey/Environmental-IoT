@@ -12,8 +12,9 @@ define [
   'cs!views/WeatherPressureView'
   'cs!views/SheepPositionTrackerView'
   'cs!views/WeatherWindSpeedView'
+  'cs!views/TimeControlView'
   'adminlte'
-], ($, Backbone, SheepPositionMap, SensorPositionView, NodeStatusView, SheepStatusView, SheepHeatMapView, SoilLocationView, WeatherRainfallView, WeatherTemperatureView, WeatherPressureView, SheepPositionTrackerView, WeatherWindSpeedView)-> Backbone.View.extend
+], ($, Backbone, SheepPositionMap, SensorPositionView, NodeStatusView, SheepStatusView, SheepHeatMapView, SoilLocationView, WeatherRainfallView, WeatherTemperatureView, WeatherPressureView, SheepPositionTrackerView, WeatherWindSpeedView, TimeControlView)-> Backbone.View.extend
 
   initialize: ->
     if $(SheepPositionMap.prototype.el).length
@@ -23,14 +24,21 @@ define [
       @sensorPositionView = new SensorPositionView collection: @model.soil.nodes
 
     if $(NodeStatusView.prototype.el).length
-      @nodeStatusView = new NodeStatusView 
+      @nodeStatusView = new NodeStatusView
         collection:   @model.soil.nodes
         nodeRegistry: @model.nodeRegistry
         type:         'Soil'
 
+    console.log "before timecontrolview"
+    # timeControlEl = '#dateNowText'
+    if $(TimeControlView.prototype.el).length
+      @timeControlView = new TimeControlView
+        clock: @model.clock
+      console.log "firing timecontrolview"
+
     sheepNodeStatusEl = '#sheepNodeStatus'
     if $(sheepNodeStatusEl).length
-      @nodeStatusView = new NodeStatusView 
+      @nodeStatusView = new NodeStatusView
         collection:   @model.sheep.nodes
         nodeRegistry: @model.nodeRegistry
         type:         'Sheep'

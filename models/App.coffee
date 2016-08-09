@@ -17,11 +17,11 @@ module.exports = class
 
   connectToDatabase: ->
     console.log 'Connecting to local database'
-    
+
     mongoose.connect 'mongodb://localhost/envdata', (err) ->
       if err then console.log 'Connection error', err
       else console.log 'Connection successful'
- 
+
   # The following defines an instance of a FakeClock which loops around the
   # dates which the sensors were deployed.
   createClock: ->
