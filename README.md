@@ -62,3 +62,5 @@ Understanding and Managing the Natural Environment through Internet of Things Te
     echo "nsb-iot.cloudapp.net" >> /etc/ansible/hosts
 
     ansible-playbook ansible/live.yaml --ask-sudo-pass
+
+    
