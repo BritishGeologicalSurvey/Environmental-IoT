@@ -6,7 +6,7 @@ define [
   "cs!collections/Sheep"
   "cs!collections/Weather"
 ], (Backbone, Clock, NodeRegistry, Soil, Sheep, Weather)-> Backbone.Model.extend
-  
+
   initialize: ->
     @clock = new Clock
     @nodeRegistry = new NodeRegistry
@@ -24,13 +24,13 @@ define [
   Return a new collection of sheep observations which is bound to this models
   node registry.
   ###
-  createSheep: -> new Sheep [], registry: @nodeRegistry
+  createSheep: -> new Sheep [], registry: @nodeRegistry, clock: @clock
 
   ###
   Return a new collection of soil observations bound to this modules node registry
   ###
-  createSoil: -> new Soil  [], registry: @nodeRegistry
+  createSoil: -> new Soil  [], registry: @nodeRegistry, clock: @clock
   ###
   Return a new collection of weather observations bound to this modules node registry
   ###
-  createWeather: -> new Weather  [], registry: @nodeRegistry
+  createWeather: -> new Weather  [], registry: @nodeRegistry, clock: @clock

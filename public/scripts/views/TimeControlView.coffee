@@ -44,7 +44,7 @@ define [
   #   @time.data('DateTimePicker').maxDate now
 
   dropDownDingDong: (evt) ->
-    # console.log evt.target.value
+    console.log "Changing clock time to: " + evt.target.value
     @clock.currentClockOffset = evt.target.value
     @clock.storeOffset()
     @clock.poll()

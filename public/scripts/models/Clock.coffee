@@ -7,6 +7,7 @@ define [
 
   initialize: ->
     @on 'sync', @storeOffset
+    # @currentClockOffset = "2015-12-18T09:05:00Z"
     @currentClockOffset = "2015-07-21T11:40:00Z"
 
   ###

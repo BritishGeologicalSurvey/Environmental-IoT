@@ -17,5 +17,5 @@ define [
   refresh: ->
     online = @collection.length
     known = @nodeRegistry.where(node_type: @type).length
-
+    console.log "Updating node status now"
     @$('h3').html "#{online} / #{known}"

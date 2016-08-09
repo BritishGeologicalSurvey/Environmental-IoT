@@ -28,7 +28,6 @@ module.exports = class
     for range in @ranges
       withinRange = offset < range.length
       newCalculatedDate = new Date(range.start + offset)
-      # $("#dateNowText").text(newCalculatedDate) if withinRange
       return newCalculatedDate if withinRange
       offset -= range.length
 
